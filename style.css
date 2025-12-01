@@ -1,0 +1,357 @@
+/* =========================================
+   1. VARIABLES & CONFIGURATION (THEME)
+   ========================================= */
+:root {
+    --bg-pink: #ffe6f0;       /* Fond très pâle */
+    --dark-pink: #ff69b4;     /* Rose bonbon */
+    --soft-pink: #ffb6c1;     /* Rose pastel */
+    --text-color: #7c4a5e;    /* Texte marron/rose foncé */
+    --box-bg: #ffffff;
+    --border-style: 3px dashed var(--soft-pink);
+    --radius: 20px;
+}
+
+/* =========================================
+   2. BASE & TYPOGRAPHIE
+   ========================================= */
+body {
+    cursor: url("src/img/cursor.png") 16 16, auto;
+    
+    background-color: var(--bg-pink);
+    /* Motif de fond mignon */
+    background-image: 
+        linear-gradient(rgba(255, 255, 255, 0.5) 2px, transparent 2px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.5) 2px, transparent 2px);
+    background-size: 20px 20px;
+    
+    color: var(--text-color);
+    font-family: 'Fredoka', sans-serif;
+    font-size: 16px;
+    margin: 0;
+    overflow-x: hidden;
+}
+body.clicking {
+    cursor: url("src/img/grab.png") 16 16, auto; /* Curseur lors du clic */
+}
+
+/* Scrollbar personnalisée */
+::-webkit-scrollbar {
+    width: 12px;
+    background: var(--bg-pink);
+}
+::-webkit-scrollbar-thumb {
+    background: var(--soft-pink);
+    border-radius: 10px;
+    border: 2px solid white;
+}
+
+/* =========================================
+   3. LAYOUT (STRUCTURE)
+   ========================================= */
+.container {
+    max-width: 900px;
+    margin: 20px auto;
+    display: grid;
+    grid-template-columns: 240px 1fr; /* Sidebar (240px) + Contenu (Reste) */
+    gap: 20px;
+    padding: 20px;
+    border: 4px double var(--dark-pink);
+    border-radius: var(--radius);
+    background: rgba(255,255,255,0.95);
+    box-shadow: 0 5px 15px rgba(255, 105, 180, 0.3);
+}
+
+header, footer {
+    grid-column: 1 / -1; /* Prend toute la largeur */
+}
+
+aside {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* =========================================
+   4. HEADER
+   ========================================= */
+header {
+    text-align: center;
+    background: var(--soft-pink);
+    padding: 25px;
+    border-radius: var(--radius);
+    border: 3px dotted white;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Oreilles de lapin (pseudo-éléments) */
+header::before, header::after {
+    content: '(\_/)';
+    font-family: monospace;
+    position: absolute;
+    top: 10px;
+    font-size: 20px;
+    color: white;
+}
+header::before { left: 20px; }
+header::after { right: 20px; }
+
+header h1 {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 32px;
+    color: white;
+    text-shadow: 
+        -2px -2px 0 var(--dark-pink),  
+         2px -2px 0 var(--dark-pink),
+        -2px  2px 0 var(--dark-pink),
+         2px  2px 0 var(--dark-pink);
+    margin: 0;
+    letter-spacing: 2px;
+}
+
+.welcome-marquee {
+    background: white;
+    border: 2px dashed var(--dark-pink);
+    border-radius: 15px;
+    margin-top: 15px;
+    color: var(--dark-pink);
+    padding: 5px;
+}
+
+/* =========================================
+   5. COMPOSANTS UI (Boites, Navigation...)
+   ========================================= */
+.box, .entry {
+    background: var(--box-bg);
+    border: var(--border-style);
+    border-radius: var(--radius);
+    padding: 15px;
+    position: relative;
+}
+
+.entry { padding: 20px; }
+
+/* Déco coeur sur les boites */
+.box::after {
+    content: '♥';
+    position: absolute;
+    top: -10px;
+    right: -5px;
+    color: var(--dark-pink);
+    font-size: 20px;
+    background: white;
+    border-radius: 50%;
+}
+
+.box-header {
+    background: var(--soft-pink);
+    color: white;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 11px;
+    padding: 8px;
+    margin: -15px -15px 15px -15px;
+    border-radius: var(--radius) var(--radius) 0 0;
+    text-align: center;
+    border-bottom: 2px dotted white;
+}
+
+/* Utilitaires de texte */
+.text-center { text-align: center; }
+.text-xs { font-size: 12px; }
+.text-kaomoji { color: var(--dark-pink); font-size: 12px; }
+
+/* --- Navigation --- */
+ul.nav {
+    list-style-type: none;
+    padding-left: 0;
+    margin: 0;
+}
+ul.nav li {
+    margin-bottom: 8px;
+    border-bottom: 1px dashed var(--bg-pink);
+    padding-bottom: 5px;
+}
+ul.nav a {
+    color: var(--dark-pink);
+    text-decoration: none;
+    display: block;
+    font-weight: bold;
+    transition: 0.3s;
+}
+ul.nav a:hover {
+    padding-left: 10px;
+    color: #ff85c2;
+}
+ul.nav a::before { content: '♡ '; }
+ul.nav a:hover::before { 
+    content: '(\\ /) '; 
+    font-family: monospace; 
+}
+
+/* --- Profil --- */
+.pfp-container { text-align: center; }
+.pfp {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 4px solid var(--soft-pink);
+    padding: 3px;
+    background: white;
+}
+.profile-info { text-align: center; margin-bottom: 5px; }
+
+/* --- Music Player --- */
+.now-playing {
+    background: var(--bg-pink);
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 5px;
+    color: var(--dark-pink);
+    font-size: 12px;
+}
+.btn-control {
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+}
+.btn-control.secondary { background: var(--soft-pink); color: white; }
+.btn-control.primary { background: var(--dark-pink); color: white; padding: 5px 10px; }
+
+/* --- Badges --- */
+.badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    justify-content: center;
+    background: var(--bg-pink);
+    padding: 10px;
+    border-radius: 10px;
+}
+.badges img {
+    border-radius: 5px;
+    border: 1px solid white;
+}
+
+/* =========================================
+   6. CONTENU PRINCIPAL (Articles)
+   ========================================= */
+.entry h2 {
+    color: var(--dark-pink);
+    font-family: 'Press Start 2P', cursive;
+    font-size: 18px;
+    margin-top: 0;
+    border-bottom: 3px dotted var(--soft-pink);
+    padding-bottom: 10px;
+    display: inline-block;
+}
+
+.date {
+    background: var(--bg-pink);
+    color: var(--dark-pink);
+    display: inline-block;
+    padding: 4px 10px;
+    font-size: 12px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+hr.cute {
+    border: 0;
+    height: 20px;
+    background-image: url('https://placehold.co/30x20/fff/ffb6c1?text=♥+♥+♥');
+    background-repeat: repeat-x;
+    margin: 20px 0;
+}
+
+.footer-img {
+    border-radius: 15px;
+    border: 2px dotted var(--soft-pink);
+}
+
+/* Todo List personnalisée */
+.heart-list { list-style-type: '♥ '; }
+
+.water-reminder {
+    background: var(--bg-pink);
+    border: 2px dashed var(--dark-pink);
+    padding: 10px;
+    border-radius: 15px;
+    text-align: center;
+}
+
+/* =========================================
+   7. MODEL VIEWER 3D
+   ========================================= */
+.medaillon-container {
+    width: 350px;
+    height: 350px;
+    margin: 0 auto;
+    max-width: 90vw; /* Responsive */
+    max-height: 90vw;
+}
+
+model-viewer {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+/* =========================================
+   8. FOOTER
+   ========================================= */
+footer {
+    text-align: center;
+    border-top: 3px dotted var(--soft-pink);
+    padding-top: 20px;
+    font-size: 14px;
+    color: var(--soft-pink);
+}
+
+.footer-link {
+    color: var(--dark-pink);
+    text-decoration: none;
+}
+.footer-badges { margin-top: 15px; }
+
+
+.side-decoration {
+    position: fixed; /* C'est ça qui rend l'élément "no-scroll" */
+    top: 50%;        /* Centré verticalement */
+    transform: translateY(-50%); /* Ajustement pour être parfaitement au milieu */
+    width: 100px;    /* Largeur de la zone 3D */
+    height: 200px;   /* Hauteur de la zone 3D */
+    z-index: -1;     /* RESTE DERRIÈRE le contenu principal */
+    
+    /* Petite animation de flottement pour le fun */
+    animation: float 3s ease-in-out infinite;
+}
+
+.side-decoration.left {
+    left: 200px; /* Collé à gauche */
+    rotate: -30deg;
+}
+
+.side-decoration.right {
+    right: 200px; /* Collé à droite */
+    rotate: 30deg;
+}
+
+/* S'assurer que le container passe DEVANT les modèles si on réduit la fenêtre */
+.container {
+    position: relative;
+    z-index: 10; 
+}
+
+/* Animation de flottement (haut/bas doux) */
+@keyframes float {
+    0% { transform: translateY(-50%) translateY(0px); }
+    50% { transform: translateY(-50%) translateY(-15px); }
+    100% { transform: translateY(-50%) translateY(0px); }
+}

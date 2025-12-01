@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Goonmaxxers Global Initiative ™</title>
+    <style>
+        /* --- CORE AESTHETIC : FRUTIGER AERO --- */
+        :root {
+            --sky-blue: #87CEEB;
+            --fresh-green: #7CFC00;
+            --gloss-white: rgba(255, 255, 255, 0.85);
+            --glass-border: 1px solid rgba(255, 255, 255, 0.9);
+            --text-dark: #333333;
+            --shadow-soft: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            /* Fond dégradé Ciel / Herbe typique */
+            background: linear-gradient(to bottom, #2980b9, #6dd5fa, #ffffff);
+            background-attachment: fixed;
+            font-family: 'Verdana', 'Segoe UI', sans-serif;
+            margin: 0;
+            color: var(--text-dark);
+            height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Effet "Bokeh" ou bulles en arrière plan (simulation CSS) */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+                radial-gradient(rgba(255,255,255,0.2) 2px, transparent 2px),
+                radial-gradient(rgba(255,255,255,0.15) 10px, transparent 10px);
+            background-size: 50px 50px, 100px 100px;
+            background-position: 0 0, 50px 50px;
+            z-index: -1;
+        }
+
+        /* --- SQUELETTE FLOTTANT --- */
+        .glass-container {
+            max-width: 960px;
+            margin: 40px auto;
+            background: var(--gloss-white);
+            border: var(--glass-border);
+            border-radius: 20px;
+            box-shadow: var(--shadow-soft);
+            backdrop-filter: blur(10px); /* Effet verre dépoli */
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 20px;
+        }
+
+        /* --- HEADER --- */
+        header {
+            grid-column: 1 / -1;
+            background: linear-gradient(to bottom, #ffffff, #e6f7ff);
+            border-radius: 15px;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            border: 1px solid #cceeff;
+            box-shadow: inset 0 1px 0 #fff, 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .logo-circle {
+            width: 60px;
+            height: 60px;
+            background: radial-gradient(circle at 30% 30%, #aaffff, #0099cc);
+            border-radius: 50%;
+            margin-right: 15px;
+            box-shadow: 0 0 10px #87CEEB;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 24px;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+        }
+
+        h1 {
+            margin: 0;
+            font-weight: normal;
+            color: #005580;
+            letter-spacing: -1px;
+        }
+        
+        .slogan { font-size: 12px; color: #66aa44; font-style: italic; }
+
+        /* --- SIDEBAR (WIDGETS VISTA) --- */
+        aside {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .widget {
+            background: rgba(255,255,255,0.6);
+            border-radius: 15px;
+            padding: 10px;
+            border: 1px solid rgba(255,255,255,0.8);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        /* MENU STYLE BOUTONS BRILLANTS */
+        .glossy-btn {
+            display: block;
+            background: linear-gradient(to bottom, #89f268 0%, #46c423 50%, #2db00b 51%, #2db00b 100%);
+            color: white;
+            padding: 8px 15px;
+            margin-bottom: 8px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: bold;
+            text-align: center;
+            text-shadow: 0 -1px 0 rgba(0,0,0,0.2);
+            border: 1px solid #2db00b;
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.4);
+            transition: transform 0.1s;
+        }
+        
+        .glossy-btn:hover {
+            filter: brightness(1.1);
+            transform: scale(1.02);
+        }
+        
+        .glossy-btn.blue {
+            background: linear-gradient(to bottom, #68cff2 0%, #239cc4 50%, #0b8ab0 51%, #0b8ab0 100%);
+            border-color: #0b8ab0;
+        }
+
+        /* --- MAIN CONTENT --- */
+        main {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
+            min-height: 400px;
+        }
+
+        .content-header {
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            color: #444;
+        }
+
+        p { line-height: 1.6; color: #555; font-size: 14px; }
+
+        /* Images avec reflet */
+        .reflected-img {
+            border-radius: 10px;
+            box-shadow: 0 10px 20px -5px rgba(0,0,0,0.3);
+            border: 4px solid white;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            grid-column: 1 / -1;
+            text-align: center;
+            font-size: 11px;
+            color: #888;
+            margin-top: 20px;
+            border-top: 1px solid #eee;
+            padding-top: 10px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="glass-container">
+        <header>
+            <div class="logo-circle">G</div>
+            <div>
+                <h1>Goonmaxxers</h1>
+                <span class="slogan">Optimizing the Future, Today.</span>
+            </div>
+            
+            <div style="margin-left: auto; position: relative;">
+                <input type="text" placeholder="Search..." style="border-radius: 20px; border: 1px solid #ccc; padding: 5px 10px; outline: none;">
+                <span style="position:absolute; right: 10px; top:5px; color:#aaa;">🔍</span>
+            </div>
+        </header>
+
+        <aside>
+            <div class="widget">
+                <div style="font-weight:bold; margin-bottom:10px; color:#555;">Main Menu</div>
+                <a href="#" class="glossy-btn">🏠 Home Page</a>
+                <a href="#" class="glossy-btn blue">👥 Community</a>
+                <a href="#" class="glossy-btn blue">🖼 Gallery (HD)</a>
+                <a href="#" class="glossy-btn blue">✉ Contact Us</a>
+            </div>
+
+            <div class="widget" style="text-align: center;">
+                <div style="font-size:12px; color:#888;">Local Weather</div>
+                <div style="font-size: 40px;">☀</div>
+                <div style="font-weight:bold; color:#333;">24°C</div>
+                <div style="font-size:11px; color:green;">Perfect for Gooning</div>
+            </div>
+
+            <div class="widget">
+                <div style="background:black; height:80px; border-radius:5px; position:relative; overflow:hidden;">
+                    <div style="position:absolute; bottom:0; width:100%; height:30px; background:linear-gradient(to top, #00ff00, transparent); opacity:0.5;"></div>
+                </div>
+                <div style="display:flex; justify-content:center; gap:5px; margin-top:5px;">
+                    <button style="border-radius:50%; border:1px solid #ccc; width:25px; height:25px;">◀</button>
+                    <button style="border-radius:50%; border:1px solid #ccc; width:25px; height:25px;">▶</button>
+                </div>
+            </div>
+        </aside>
+
+        <main>
+            <div class="content-header">
+                <h2>Welcome to version 2.0</h2>
+            </div>
+
+            <div style="display: flex; gap: 20px; align-items: flex-start;">
+                <img src="https://placehold.co/200x150/87CEEB/fff?text=Water+Droplet" class="reflected-img" alt="Nature">
+                <div>
+                    <h3>Connecting People.</h3>
+                    <p>
+                        Chez <b>Goonmaxxers</b>, nous croyons en un web plus propre, plus brillant et plus rond. 
+                        Notre nouvelle interface Aero Glass™ vous permet de naviguer avec une fluidité inégalée.
+                    </p>
+                    <p>
+                        <span style="background: #e6ffcc; padding: 2px 5px; border-radius: 4px; border: 1px solid #b3e680; color: #44aa00; font-size: 11px;">NEW!</span>
+                        Regardez notre collection de fonds d'écran avec des poissons tropicaux.
+                    </p>
+                </div>
+            </div>
+
+            <br>
+            <hr style="border: 0; height: 1px; background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0));">
+            <br>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                <div style="background: #f9f9f9; padding: 10px; border-radius: 10px; border: 1px solid #eee;">
+                    <h4 style="margin-top:0; color:#239cc4;">Latest News</h4>
+                    <ul style="padding-left: 20px; font-size: 12px; color: #666;">
+                        <li>Serveur mis à jour vers Windows Vista.</li>
+                        <li>Ajout de 50 nouveaux curseurs brillants.</li>
+                        <li>La transparence est activée.</li>
+                    </ul>
+                </div>
+                
+                <div style="background: #f9f9f9; padding: 10px; border-radius: 10px; border: 1px solid #eee;">
+                    <h4 style="margin-top:0; color:#46c423;">Eco-System</h4>
+                    <p style="font-size: 12px; margin:0;">
+                        Notre site consomme 0% de CPU quand vous ne le regardez pas. C'est la magie du Web 2.0.
+                    </p>
+                </div>
+            </div>
+
+        </main>
+
+        <footer>
+            Goonmaxxers © 2008-202X • <a href="#" style="color:#555;">Privacy Policy</a> • <a href="#" style="color:#555;">Terms of Service</a>
+            <br>
+            Designed for Internet Explorer 7 and above.
+        </footer>
+    </div>
+
+</body>
+</html>
