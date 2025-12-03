@@ -1,3 +1,4 @@
+
 /* =========================================
    1. VARIABLES & CONFIGURATION (THEME)
    ========================================= */
@@ -30,6 +31,14 @@ body {
     margin: 0;
     overflow-x: hidden;
 }
+@font-face {
+    font-family: 'FiolexGirl';
+    src: url('src/fonts/fiolexgirl.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+    
 body.clicking {
     cursor: url("src/img/grab.png") 16 16, auto; /* Curseur lors du clic */
 }
@@ -103,7 +112,7 @@ header::before { left: 20px; }
 header::after { right: 20px; }
 
 header h1 {
-    font-family: 'Press Start 2P', cursive;
+    font-family: 'FiolexGirl', cursive;
     font-size: 32px;
     color: white;
     text-shadow: 
