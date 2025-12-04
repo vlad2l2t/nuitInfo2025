@@ -30,6 +30,41 @@ body {
 
 
 /* EFFETS UI */
+
+/*Scanlines*/
+    .crt-scanlines {
+    position: fixed; 
+    inset: 0; 
+    pointer-events: none; 
+    z-index: 90;
+    
+    /* ATTENTION : L'ajout de background-position: 0 0; est CRUCIAL pour que l'animation démarre */
+    background-position: 0 0; 
+    
+    /* Motif de base : Lignes horizontales fines */
+    background: repeating-linear-gradient(
+        to bottom,
+        transparent 0px,
+        transparent 1px,
+        rgba(253, 0, 0, 0.2) 2px
+    );
+    background-size: 100% 4px; 
+    
+    /* Lancement de l'animation */
+    animation: scanlines-move 6s linear infinite;
+    
+    opacity: 0.7; 
+}
+
+/* Les Keyframes restent les mêmes, mais elles sont maintenant déclenchées */
+@keyframes scanlines-move {
+    from { 
+        background-position: 0 0; /* Commence à la position initiale */
+    }
+    to { 
+        background-position: 0 4px; /* Déplace le motif vers le bas d'une hauteur d'onde */
+    }
+}
 body.is-grabbing { 
     cursor: url("src/img/grab.png") 16 16, grabbing; 
 }
@@ -181,7 +216,7 @@ body.is-grabbing {
 /* Tux dancing panel */
     .hero-panel {
         display: flex; align-items: center; justify-content: space-between;
-        padding: 0 3rem; background: radial-gradient(circle at center, #111, #000);
+        padding: 0 5rem; background: radial-gradient(circle at center, #111, #000);
         height: 400px;
     }
     .hero-content { flex: 1; }
@@ -195,6 +230,9 @@ body.is-grabbing {
         padding: 2rem; background: #050505;
         display: flex; justify-content: space-between;
         border-top: 4px solid var(--color-accent-alert);
+    }
+    .gif-centered {
+        display: flex; align-items: center; justify-content: center;
     }
     .align-right { text-align: right; }
     .footer-col strong { display: block; font-family: var(--font-display); font-size: 1.2rem; }

@@ -25,37 +25,39 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     setInterval(updateUptime, 1000);
 
-    //Effets pour le h1 "RÉSISTANCE"
+    // TXT Scramble
     const title = document.querySelector('.hero-title');
     if (title) {
         const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
         let interval = null;
+        
         const scramble = () => {
             let iteration = 0;
-            const originalText = title.dataset.value || title.innerText;
+            const originalText = title.dataset.value || title.innerText; 
             const lettersLen = letters.length;
-            
             clearInterval(interval);
+
             interval = setInterval(() => {
                 title.innerText = originalText
                     .split("")
                     .map((letter, index) => {
                         if (letter === " ") return " ";
+                        
                         if (index < Math.floor(iteration)) {
                             return originalText[index];
                         }
+                        
                         return letters[Math.floor(Math.random() * lettersLen)];
                     })
-              .join("");
-          
-          if (iteration >= originalText.length) { 
-              clearInterval(interval);
-          }
-          iteration += 1;
-            }, 16);
+                    .join("");
+            
+                if (iteration >= originalText.length) { 
+                    clearInterval(interval);
+                }
+                iteration += 0.5; 
+            }, 35);
         };
         scramble();
-        //Se relance au hover
         title.addEventListener('mouseover', scramble);
     }
 });
