@@ -1,366 +1,217 @@
-
-/* =========================================
-   1. VARIABLES & CONFIGURATION (THEME)
-   ========================================= */
 :root {
-    --bg-pink: #ffe6f0;       /* Fond très pâle */
-    --dark-pink: #ff69b4;     /* Rose bonbon */
-    --soft-pink: #ffb6c1;     /* Rose pastel */
-    --text-color: #7c4a5e;    /* Texte marron/rose foncé */
-    --box-bg: #ffffff;
-    --border-style: 3px dashed var(--soft-pink);
-    --radius: 20px;
+    /* Palette */
+    --color-bg-primary: #0a0a0a;
+    --color-bg-secondary: #111111;
+    --color-text-main: #e0e0e0;
+    --color-text-muted: #888888;
+
+    /* Accents */
+    --color-accent-alert: #cc0000;
+    --color-accent-silver: #c0c0c0; 
+    
+    --grid-gap: 0px;
+    --border-width: 2px;
+    --border-color: #2a2a2a;
+    --font-display: 'Anton', sans-serif;
+    --font-mono: 'Space Mono', monospace;
 }
 
-/* =========================================
-   2. BASE & TYPOGRAPHIE
-   ========================================= */
+/* Reset */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
 body {
     cursor: url("src/img/cursor.png") 16 16, auto;
-    
-    background-color: var(--bg-pink);
-    /* Motif de fond mignon */
-    background-image: 
-        linear-gradient(rgba(255, 255, 255, 0.5) 2px, transparent 2px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.5) 2px, transparent 2px);
-    background-size: 20px 20px;
-    
-    color: var(--text-color);
-    font-family: 'Fredoka', sans-serif;
-    font-size: 16px;
-    margin: 0;
+    background-color: var(--color-bg-primary);
+    color: var(--color-text-main);
+    font-family: var(--font-mono);
     overflow-x: hidden;
-}
-@font-face {
-    font-family: 'FiolexGirl';
-    src: url('src/fonts/fiolexgirl.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
+    line-height: 1.5;
 }
 
-    
-body.clicking {
-    cursor: url("src/img/grab.png") 16 16, auto; /* Curseur lors du clic */
+
+/* EFFETS UI */
+body.is-grabbing { 
+    cursor: url("src/img/grab.png") 16 16, grabbing; 
+}
+.ui-scanlines {
+    position: fixed; inset: 0; pointer-events: none; z-index: 90;
+    background: repeating-linear-gradient(
+        to bottom,
+        transparent 0px,
+        transparent 2px,
+        rgba(0, 0, 0, 0.1) 3px
+    );
 }
 
-/* Scrollbar personnalisée */
-::-webkit-scrollbar {
-    width: 12px;
-    background: var(--bg-pink);
-}
-::-webkit-scrollbar-thumb {
-    background: var(--soft-pink);
-    border-radius: 10px;
-    border: 2px solid white;
+.ui-vignette {
+    position: fixed; inset: 0; pointer-events: none; z-index: 91;
+    background: radial-gradient(circle, transparent 60%, rgba(0,0,0,0.4) 100%);
 }
 
-/* =========================================
-   3. LAYOUT (STRUCTURE)
-   ========================================= */
-.container {
-    max-width: 900px;
-    margin: 20px auto;
-    display: grid;
-    grid-template-columns: 240px 1fr; /* Sidebar (240px) + Contenu (Reste) */
-    gap: 20px;
-    padding: 20px;
-    border: 4px double var(--dark-pink);
-    border-radius: var(--radius);
-    background: rgba(255,255,255,0.95);
-    box-shadow: 0 5px 15px rgba(255, 105, 180, 0.3);
+.ui-noise {
+    position: fixed; inset: 0; pointer-events: none; z-index: 89;
+    background-image: url("https://www.transparenttextures.com/patterns/stardust.png");
+    opacity: 0.05;
 }
 
-header, footer {
-    grid-column: 1 / -1; /* Prend toute la largeur */
-}
+/* LAYOUT GRILLE */
+    .grid-container {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        width: 100%;
+        border: var(--border-width) solid var(--border-color);
+        margin-bottom: 5rem;
+    }
 
-aside {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
+    .grid-item {
+        position: relative;
+        border-bottom: var(--border-width) solid var(--border-color);
+        overflow: hidden;
+    }
+    .span-full { grid-column: 1 / -1; }
+    .span-double { grid-column: span 2; }
+    .span-single { grid-column: span 1; }
+    .border-right { border-right: var(--border-width) solid var(--border-color); }
 
-main {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
+    .text-alert { color: var(--color-accent-alert); }
+    .text-silver { color: var(--color-accent-silver); }
+    .text-highlight { color: #fff; text-decoration: underline decoration-color var(--color-accent-alert); }
 
-/* =========================================
-   4. HEADER
-   ========================================= */
-header {
-    text-align: center;
-    background: var(--soft-pink);
-    padding: 25px;
-    border-radius: var(--radius);
-    border: 3px dotted white;
-    position: relative;
-    overflow: hidden;
-}
 
-/* Oreilles de lapin (pseudo-éléments) */
-header::before, header::after {
-    content: '(\_/)';
-    font-family: monospace;
-    position: absolute;
-    top: 10px;
-    font-size: 20px;
-    color: white;
-}
-header::before { left: 20px; }
-header::after { right: 20px; }
+/*COMPOSANTS*/
 
-header h1 {
-    font-family: 'FiolexGirl', cursive;
-    font-size: 32px;
-    color: white;
-    text-shadow: 
-        -2px -2px 0 var(--dark-pink),  
-         2px -2px 0 var(--dark-pink),
-        -2px  2px 0 var(--dark-pink),
-         2px  2px 0 var(--dark-pink);
-    margin: 0;
-    letter-spacing: 2px;
-}
 
-.welcome-marquee {
-    background: white;
-    border: 2px dashed var(--dark-pink);
-    border-radius: 15px;
-    margin-top: 15px;
-    color: var(--dark-pink);
-    padding: 5px;
-}
-
-/* =========================================
-   5. COMPOSANTS UI (Boites, Navigation...)
-   ========================================= */
-.box, .entry {
-    background: var(--box-bg);
-    border: var(--border-style);
-    border-radius: var(--radius);
-    padding: 15px;
-    position: relative;
-}
-
-.entry { padding: 20px; }
-
-/* Déco coeur sur les boites */
-.box::after {
-    content: '♥';
-    position: absolute;
-    top: -10px;
-    right: -5px;
-    color: var(--dark-pink);
-    font-size: 20px;
-    background: white;
-    border-radius: 50%;
-}
-
-.box-header {
-    background: var(--soft-pink);
-    color: white;
-    font-family: 'Press Start 2P', cursive;
-    font-size: 11px;
-    padding: 8px;
-    margin: -15px -15px 15px -15px;
-    border-radius: var(--radius) var(--radius) 0 0;
-    text-align: center;
-    border-bottom: 2px dotted white;
-}
-
-/* Utilitaires de texte */
-.text-center { text-align: center; }
-.text-xs { font-size: 12px; }
-.text-kaomoji { color: var(--dark-pink); font-size: 12px; }
-
-/* --- Navigation --- */
-ul.nav {
-    list-style-type: none;
-    padding-left: 0;
-    margin: 0;
-}
-ul.nav li {
-    margin-bottom: 8px;
-    border-bottom: 1px dashed var(--bg-pink);
-    padding-bottom: 5px;
-}
-ul.nav a {
-    color: var(--dark-pink);
-    text-decoration: none;
-    display: block;
-    font-weight: bold;
-    transition: 0.3s;
-}
-ul.nav a:hover {
-    padding-left: 10px;
-    color: #ff85c2;
-}
-ul.nav a::before { content: '♡ '; }
-ul.nav a:hover::before { 
-    content: '(\\ /) '; 
-    font-family: monospace; 
-}
-
-/* --- Profil --- */
-.pfp-container { text-align: center; }
-.pfp {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    border: 4px solid var(--soft-pink);
-    padding: 3px;
-    background: white;
-}
-.profile-info { text-align: center; margin-bottom: 5px; }
-
-/* --- Music Player --- */
-.now-playing {
-    background: var(--bg-pink);
-    border-radius: 10px;
-    padding: 10px;
-    margin-bottom: 5px;
-    color: var(--dark-pink);
-    font-size: 12px;
-}
-.btn-control {
-    border: none;
-    border-radius: 50%;
-    cursor: pointer;
-}
-.btn-control.secondary { background: var(--soft-pink); color: white; }
-.btn-control.primary { background: var(--dark-pink); color: white; padding: 5px 10px; }
-
-/* --- Badges --- */
-.badges {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 5px;
-    justify-content: center;
-    background: var(--bg-pink);
-    padding: 10px;
-    border-radius: 10px;
-}
-.badges img {
-    border-radius: 5px;
-    border: 1px solid white;
-}
-
-/* =========================================
-   6. CONTENU PRINCIPAL (Articles)
-   ========================================= */
-.entry h2 {
-    color: var(--dark-pink);
-    font-family: 'Press Start 2P', cursive;
-    font-size: 18px;
-    margin-top: 0;
-    border-bottom: 3px dotted var(--soft-pink);
-    padding-bottom: 10px;
-    display: inline-block;
-}
-
-.date {
-    background: var(--bg-pink);
-    color: var(--dark-pink);
-    display: inline-block;
-    padding: 4px 10px;
-    font-size: 12px;
-    border-radius: 10px;
-    margin-bottom: 10px;
-    font-weight: bold;
-}
-
-hr.cute {
-    border: 0;
-    height: 20px;
-    background-image: url('https://placehold.co/30x20/fff/ffb6c1?text=♥+♥+♥');
-    background-repeat: repeat-x;
-    margin: 20px 0;
-}
-
-.footer-img {
-    border-radius: 15px;
-    border: 2px dotted var(--soft-pink);
-}
-
-/* Todo List personnalisée */
-.heart-list { list-style-type: '♥ '; }
-
-.water-reminder {
-    background: var(--bg-pink);
-    border: 2px dashed var(--dark-pink);
-    padding: 10px;
-    border-radius: 15px;
+.header-panel {
+    padding: 3rem 2rem;
+    background: radial-gradient(circle at top, #1a1a1a, #000);
     text-align: center;
 }
 
-/* =========================================
-   7. MODEL VIEWER 3D
-   ========================================= */
-.medaillon-container {
-    width: 350px;
-    height: 350px;
-    margin: 0 auto;
-    max-width: 90vw; /* Responsive */
-    max-height: 90vw;
+.panel-meta {
+    display: flex; justify-content: space-between;
+    font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px;
+    border-bottom: 1px solid #333; padding-bottom: 1rem; margin-bottom: 2rem;
+    color: var(--color-text-muted);
 }
 
-model-viewer {
-    width: 100%;
-    height: 100%;
-    display: block;
+.hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(4rem, 10vw, 8rem);
+    line-height: 0.9; margin: 0;
+    text-transform: uppercase;
+    letter-spacing: -2px;
 }
 
-/* =========================================
-   8. FOOTER
-   ========================================= */
-footer {
-    text-align: center;
-    border-top: 3px dotted var(--soft-pink);
-    padding-top: 20px;
-    font-size: 14px;
-    color: var(--soft-pink);
+.hero-subtitle {
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    color: var(--color-text-muted);
+    margin-top: -0.5rem;
 }
 
-.footer-link {
-    color: var(--dark-pink);
-    text-decoration: none;
+/*BANDEAU DÉFILANT*/
+    .ticker-panel {
+        background: var(--color-accent-alert);
+        color: #000;
+        font-family: var(--font-display);
+        font-size: 1.5rem;
+        padding: 0.5rem 0;
+        white-space: nowrap;
+    }
+    .ticker-track { display: inline-block; animation: scroll 20s linear infinite; }
+    @keyframes scroll { from {transform: translateX(0);} to {transform: translateX(-50%);} }
+
+/* CONTENT */
+    .content-panel {
+        padding: 3rem;
+        display: flex; flex-direction: column; justify-content: center;
+    }
+    .panel-heading {
+        font-family: var(--font-display); font-size: 2.5rem; margin-bottom: 1.5rem; line-height: 1;
+    }
+    .panel-text { font-size: 1rem; max-width: 65ch; margin-bottom: 2rem; }
+
+    .data-grid { display: flex; gap: 4rem; }
+    .data-value { font-family: var(--font-display); font-size: 3.5rem; line-height: 1; display: block; }
+    .data-label { font-size: 0.75rem; color: var(--color-text-muted); letter-spacing: 1px; }
+
+/*Panel 3D*/
+    .model-panel { background: #000; min-height: 300px; }
+    .overlay-label {
+        position: absolute; bottom: 1rem; right: 1rem;
+        background: rgba(0,0,0,0.7); padding: 0.2rem 0.5rem;
+        font-size: 0.7rem; border: 1px solid #333;
+    }
+
+/* Nav cards */
+.nav-card {
+    display: flex; flex-direction: column; justify-content: flex-end;
+    height: 350px; padding: 2rem;
+    text-decoration: none; color: var(--color-text-main);
+    background: var(--color-bg-secondary);
+    transition: background 0.3s ease;
 }
-.footer-badges { margin-top: 15px; }
+
+.card-bg-img {
+    position: absolute; inset: 0;
+    background-size: cover; background-position: center;
+    opacity: 0.1; filter: grayscale(100%); transition: 0.4s;
+    z-index: 0;
+}
+
+.card-body { position: relative; z-index: 1; margin-top: auto; }
+.card-icon { font-size: 2rem; margin-bottom: 0.5rem; display: block; }
+.card-title {
+    font-family: var(--font-display); font-size: 2.5rem; line-height: 1; margin-bottom: 0.5rem;
+}
+
+.card-hover-reveal {
+    max-height: 0; opacity: 0; overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    border-left: 2px solid var(--color-accent-alert);
+    padding-left: 1rem;
+}
+.btn-arrow { font-size: 1.5rem; color: var(--color-accent-alert); }
+
+.nav-card:hover { background: #151515; }
+.nav-card:hover .card-bg-img { opacity: 0.3; filter: grayscale(0%); }
+.nav-card:hover .card-title { color: #fff; text-shadow: 0 0 10px rgba(255,255,255,0.2); }
+.nav-card:hover .card-hover-reveal { max-height: 60px; opacity: 1; margin-top: 1rem; }
+
+/* Tux dancing panel */
+    .hero-panel {
+        display: flex; align-items: center; justify-content: space-between;
+        padding: 0 3rem; background: radial-gradient(circle at center, #111, #000);
+        height: 400px;
+    }
+    .hero-content { flex: 1; }
+    .hero-title-small { font-family: var(--font-display); font-size: 4rem; line-height: 1; }
+    .model-wrapper { width: 300px; height: 300px; }
 
 
-.side-decoration {
-    position: fixed; /* C'est ça qui rend l'élément "no-scroll" */
-    top: 50%;        /* Centré verticalement */
-    transform: translateY(-50%); /* Ajustement pour être parfaitement au milieu */
-    width: 100px;    /* Largeur de la zone 3D */
-    height: 200px;   /* Hauteur de la zone 3D */
-    z-index: -1;     /* RESTE DERRIÈRE le contenu principal */
-    
-    /* Petite animation de flottement pour le fun */
-    animation: float 3s ease-in-out infinite;
-}
 
-.side-decoration.left {
-    left: 200px; /* Collé à gauche */
-    rotate: -30deg;
-}
+/* FOOTER */
+    .footer-panel {
+        padding: 2rem; background: #050505;
+        display: flex; justify-content: space-between;
+        border-top: 4px solid var(--color-accent-alert);
+    }
+    .align-right { text-align: right; }
+    .footer-col strong { display: block; font-family: var(--font-display); font-size: 1.2rem; }
+    .footer-col small { color: var(--color-text-muted); font-size: 0.8rem; }
 
-.side-decoration.right {
-    right: 200px; /* Collé à droite */
-    rotate: 30deg;
-}
+/* RESPONSIVE */
+    @media (max-width: 900px) {
+        .grid-container { grid-template-columns: 1fr; }
+        .span-full, .span-double, .span-single { grid-column: 1 / -1; }
+        .border-right { border-right: none; }
+        .hero-panel { flex-direction: column; padding: 2rem; height: auto; text-align: center; }
+        .data-grid { justify-content: center; }
+    }
+    .attentionEmoji {
+        width: 24px;
+        height: 24px;
+        vertical-align: middle;
+        margin: 0 5px;
+    }
 
-/* S'assurer que le container passe DEVANT les modèles si on réduit la fenêtre */
-.container {
-    position: relative;
-    z-index: 10; 
-}
-
-/* Animation de flottement (haut/bas doux) */
-@keyframes float {
-    0% { transform: translateY(-50%) translateY(0px); }
-    50% { transform: translateY(-50%) translateY(-15px); }
-    100% { transform: translateY(-50%) translateY(0px); }
-}

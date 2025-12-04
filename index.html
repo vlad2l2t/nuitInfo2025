@@ -1,156 +1,148 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>❤️ GOONMAXXERS ❤️</title>
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Press+Start+2P&display=swap" rel="stylesheet">
+    <title>NIRD by Goonmaxxers</title>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
     <link rel="stylesheet" href="style.css">
-    <script src="main.js" defer></script>
 </head>
 <body>
-            <div class="side-decoration left">
-                    <model-viewer
-                        src="src/3d/whiteMonster.glb"
-                        alt="Monter blanche à gauche"
-                        auto-rotate
-                        rotation-per-second="-100deg"
-                        disable-zoom
-                        disable-pan
-                        shadow-intensity="1"
-                        style="background-color: transparent;">
-                    </model-viewer>
-                </div>
 
-                <div class="side-decoration right">
-                    <model-viewer
-                        src="src/3d/pinkMonster.glb"
-                        alt="Monter rose à droite"
-                        auto-rotate
-                        rotation-per-second="100deg" 
-                        disable-zoom
-                        disable-pan
-                        shadow-intensity="1"
-                        style="background-color: transparent;">
-                    </model-viewer>
-                </div>
+    <div class="ui-scanlines"></div>
+    <div class="ui-vignette"></div>
+    <div class="ui-noise"></div>
 
-    <div class="container">
-        <header>
-            <h1>❤️ GOONMAXXERS ❤️</h1>
-            <marquee class="welcome-marquee" scrollamount="4">
-                ♡ bienvenue ♡ sur le central hub du gooning professionnel
-            </marquee>
+    <main class="grid-container">
+        
+        <header class="grid-item span-full header-panel">
+            <div class="panel-meta">
+                <span class="meta-tag">UNITÉ: <span class="text-highlight">GOONMAXXERS</span></span>
+                <span class="meta-tag">CONTEXTE: <span class="text-highlight">NUIT_INFO_2025</span></span>
+                <span class="meta-tag" id="uptime-counter">UPTIME: 00:00:00</span>
+            </div>
+            
+            <div class="title-wrapper">
+                <h1 class="hero-title" data-value="RÉSISTANCE">RÉSISTANCE</h1>
+                <h2 class="hero-subtitle">PROTOCOLE N.I.R.D [ACTIF]</h2>
+            </div>
         </header>
 
-        <aside>
-            <div class="box">
-                <div class="box-header">Nos profils</div>
-                <div class="pfp-container">
-                    <img src="https://placehold.co/150x150/ffb6c1/ffffff?text=BUNNY+PIC" alt="Admin Bunny" class="pfp">
-                </div>
-                <p class="profile-info">
-                    <a href="https://lucas-lestiennes.fr">xchokoo</a> & <a href="https://vladimir-vallotton.fr">vlad_2l2t</a><br>
-                    <span class="text-kaomoji">(｡♥‿♥｡)</span>
-                </p>
+        <div class="grid-item span-full ticker-panel">
+            <div class="ticker-track">
+                <span><img src="src/img/attention.png" class="attentionEmoji"> OBSOLESCENCE PROGRAMMÉE DÉTECTÉE <img src="src/img/attention.png" class="attentionEmoji"> SAUVEZ VOS MACHINES <img src="src/img/attention.png" class="attentionEmoji"> INSTALLATION LINUX REQUISE <img src="src/img/attention.png" class="attentionEmoji"> REJOIGNEZ LA FORGE</span>
+                <span><img src="src/img/attention.png" class="attentionEmoji"> OBSOLESCENCE PROGRAMMÉE DÉTECTÉE <img src="src/img/attention.png" class="attentionEmoji"> SAUVEZ VOS MACHINES <img src="src/img/attention.png" class="attentionEmoji"> INSTALLATION LINUX REQUISE <img src="src/img/attention.png" class="attentionEmoji"> REJOIGNEZ LA FORGE</span>
             </div>
+        </div>
 
-            <div class="box">
-                <div class="box-header">♥ MENU ♥</div>
-                <ul class="nav">
-                    <li><a href="#">Accueil</a></li>
-                    <li><a href="#">A propos de nous</a></li>
-                    <li><a href="#">Mes articles de blog</a></li>
-                    <li><a href="#">Galerie Kawaii</a></li>
-                    <li><a href="#">Liens sympas</a></li>
-                </ul>
-            </div>
-
-            <div class="box text-center">
-                <div class="box-header">♫ GOON MUSIC ♫</div>
-                <div class="now-playing">
-                    <marquee scrollamount="2">Now Playing: Caramelldansen (Nightcore Edit)</marquee>
-                </div>
-                <button class="btn-control secondary">Is</button> 
-                <button class="btn-control primary">►</button> 
-                <button class="btn-control secondary">Is</button>
-            </div>
-
-            <div class="box">
-                <div class="box-header">♥ COLLECTION ♥</div>
-                <div class="badges">
-                    <img src="https://placehold.co/88x31/ff69b4/ffffff?text=CUTIE" alt="badge">
-                    <img src="https://placehold.co/88x31/ffb6c1/ffffff?text=PINK!" alt="badge">
-                    <img src="https://placehold.co/88x31/aeeeee/ffffff?text=BUNNY" alt="badge">
-                </div>
-            </div>
-        </aside>
-
-        <main>
-            <article class="entry">
-                <div class="date">✨ 24 Octobre 202X</div>
-                <h2>♥ NOUVEAU LOOK ! ♥</h2>
-                <p>Salut tout le monde ! (Hello world!)</p>
-                <p>Bienvenue sur la nouvelle version de <b>GOONMAXXERS</b>. J'ai décidé que l'ancien look était trop triste. Maintenant c'est 100% <i>kawaii core</i> avec plein de lapins ! 🐰</p>
-                
-                <hr class="cute">
-                
-                <p>Il reste encore des choses en construction. Je dois ajouter des paillettes et des GIFs animés partout.</p>
-                <div class="text-center">
-                    <img src="https://placehold.co/400x80/ffe6f0/ff69b4?text=~+thanks+for+visiting+~" alt="footer image" class="footer-img">
-                </div>
-            </article>
-
-            <article class="entry">
-                <div class="date">🌸 20 Octobre 202X</div>
-                <h2>♥ TODO LIST ♥</h2>
-                <p>Voici ce que je dois faire pour finir le site :</p>
-                <ul class="heart-list">
-                    <li>Trouver plus de GIFs de lapins qui mangent des gâteaux.</li>
-                    <li>Changer le curseur de souris.</li>
-                    <li>Ajouter un livre d'or (Cbox).</li>
-                    <li>Ajouter une petite blague !</li>
-                </ul>
-                
-                <div class="water-reminder">
-                    <b>Note:</b> N'oubliez pas de boire de l'eau ! <br>
-                    (\_/)<br>
-                    ( •_•)<br>
-                    / >🥤
-                </div>
-            </article>
+        <section class="grid-item span-double content-panel border-right">
+            <h3 class="panel-heading">01 // DIAGNOSTIC <span class="text-alert">CRITIQUE</span></h3>
+            <p class="panel-text">
+                L'arrêt de Windows 10 menace des millions de postes. L'école ne doit pas subir la loi des géants technologiques.
+                <br><br>
+                <strong>Notre réponse :</strong> Transformer chaque établissement en un village autonome, ingénieux et durable.
+            </p>
             
-            <article class="entry">
-                <div class="medaillon-container">
-                    <model-viewer
-                        src="src/3d/basicLabubu.glb"
-                        alt="Modèle 3D Labubu basique"
-                        auto-rotate
-                        rotation-per-second="100deg" 
-                        camera-controls
-                        disable-pan
-                        disable-zoom
-                        exposure="1.5"
-                        shadow-intensity="1">
-                    </model-viewer>
+            <div class="data-grid">
+                <div class="data-point">
+                    <span class="data-value text-alert">W10</span>
+                    <span class="data-label">FIN DE SUPPORT</span>
                 </div>
-            </article>
-        </main>
+                <div class="data-point">
+                    <span class="data-value text-silver">LIBRE</span>
+                    <span class="data-label">SOLUTION PÉRENNE</span>
+                </div>
+            </div>
+        </section>
 
-        <footer>
-            <p>
-                 (\(\<br>
-                 ( -.-)<br>
-                 o_(")(")
-            </p>
-            <p>COPYRIGHT © 2025 GOONMAXXERS. SITE REALISE POUR LA NUIT DE L'INFO 2025.</p>
-            <p>
-                <a href="#" class="footer-link">[ Credits ]</a> ♥ 
-                <a href="#" class="footer-link">[ Contact ]</a>
-            </p>
+        <div class="grid-item span-single model-panel bg-dark">
+            <model-viewer
+                src="src/3d/brokenMonitor.glb"
+                alt="Matériel obsolète"
+                camera-controls 
+                auto-rotate 
+                rotation-per-second="-50deg" 
+                disable-pan
+                shadow-intensity="1"
+                style="width: 100%; height: 100%; opacity: 0.8;">
+            </model-viewer>
+            <div class="overlay-label">MATÉRIEL_EN_DANGER</div>
+        </div>
+
+        <a href="graphene.html" class="grid-item span-single nav-card border-right">
+            <div class="card-bg-img" style="background-image: url('src/img/lock_schematic.jpg');"></div>
+            <div class="card-body">
+                <span class="card-icon">🔒</span>
+                <h4 class="card-title">SÉCURITÉ<br>MOBILE</h4>
+                <div class="card-hover-reveal">
+                    <p>Découvrir GrapheneOS</p>
+                    <span class="btn-arrow">→</span>
+                </div>
+            </div>
+        </a>
+
+        <a href="education.html" class="grid-item span-single nav-card border-right">
+            <div class="card-bg-img" style="background-image: url('src/img/brain_wire.jpg');"></div>
+            <div class="card-body">
+                <span class="card-icon">🎓</span>
+                <h4 class="card-title">ACADÉMIE<br>NIRD</h4>
+                <div class="card-hover-reveal">
+                    <p>Former les consciences</p>
+                    <span class="btn-arrow">→</span>
+                </div>
+            </div>
+        </a>
+
+        <a href="opensource.html" class="grid-item span-single nav-card">
+            <div class="card-bg-img" style="background-image: url('src/img/code_screen.jpg');"></div>
+            <div class="card-body">
+                <span class="card-icon">⚙️</span>
+                <h4 class="card-title">LA FORGE<br>COMMUNE</h4>
+                <div class="card-hover-reveal">
+                    <p>Partager les ressources</p>
+                    <span class="btn-arrow">→</span>
+                </div>
+            </div>
+        </a>
+
+        <div class="grid-item span-full hero-panel">
+            <div class="hero-content">
+                <h2 class="hero-title-small">L'ALTERNATIVE <span class="text-silver">LINUX</span></h2>
+                <p>Contre l'obsolescence programmée, le Pingouin est notre meilleur allié.</p>
+            </div>
+            <div class="model-wrapper">
+                <model-viewer
+                    src="src/3d/penguin.glb"
+                    alt="Tux Linux"
+                    autoplay
+                    loading="eager"
+                    auto-rotate
+                    camera-controls 
+                    rotation-per-second="-60deg"
+                    disable-zoom
+                    disable-pan
+                    shadow-intensity="1"
+                    animation-name="Wave"
+                    style="width: 100%; height: 100%;">
+                </model-viewer>
+            </div>
+        </div>
+
+        <footer class="grid-item span-full footer-panel">
+            <div class="footer-col">
+                <strong>NUIT DE L'INFO 2025</strong>
+                <small>SUJET: VILLAGE RÉSISTANT</small>
+            </div>
+            <div class="footer-col align-right">
+                <strong>DEV: GOONMAXXERS</strong>
+                <small>LICENCE LIBRE</small>
+            </div>
         </footer>
-    </div>
 
+    </main>
+
+    <script src="main.js"></script>
 </body>
 </html>
