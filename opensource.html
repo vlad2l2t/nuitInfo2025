@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LE VILLAGE NIRD - La Résistance</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="crt-scanlines"></div>
+    <div class="ui-vignette"></div>
+    <div class="ui-noise"></div>
+
+    <header class="header-panel">
+        <div class="panel-meta">
+            <span>ZONE : SÉCURISÉE</span>
+            <span>RÉSEAU NIRD | 100% LIBRE</span>
+        </div>
+        <div class="hero-title">LE VILLAGE</div>
+        <div class="hero-subtitle text-highlight">Construire l'Alternative</div>
+    </header>
+
+    <div class="ticker-panel">
+        <div class="ticker-track">
+            <span>[ CONNECTÉ : COMMUNAUTÉ ÉDUCATIVE ]</span>
+            <span>[ RESSOURCE : LOGICIELS LIBRES DÉPLOYÉS ]</span>
+            <span>[ OBJECTIF : AUTONOMIE TOTALE ]</span>
+        </div>
+    </div>
+
+    <div class="grid-container">
+
+        <div class="grid-item span-double content-panel">
+            <div class="panel-meta"><span class="text-highlight">TOPOLOGIE DU RÉSEAU</span></div>
+            <h2 class="panel-heading text-highlight">L'Archipel Résilient</h2>
+            <p class="panel-text">
+                Le Village c'est un réseau d'établissements interconnectés qui ont fait le choix de la liberté.
+                Ici, nous ne consommons pas le numérique, nous le façonnons.
+            </p>
+            <ul class="manifesto-list">
+                <li><strong>Matériel :</strong> PC reconditionnés (durée de vie +5 ans).</li>
+                <li><strong>Système :</strong> Linux (Léger, Sécurisé, Gratuit).</li>
+                <li><strong>Données :</strong> Hébergées localement ou sur des nuages éthiques.</li>
+            </ul>
+        </div>
+
+        <div class="grid-item span-single content-panel border-right">
+            <div class="panel-meta"><span>IMPACT RÉEL</span></div>
+            <div class="data-grid" style="grid-template-columns: 1fr;">
+                <div style="margin-bottom: 1rem;">
+                    <span class="data-value text-highlight">0€</span>
+                    <span class="data-label">COÛT LICENCE</span>
+                </div>
+                <div>
+                    <span class="data-value">-40%</span>
+                    <span class="data-label">EMPREINTE CARBONE</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid-item span-full content-panel">
+            <div class="panel-meta"><span>ARSENAL LOGICIEL</span></div>
+            <h2 class="panel-heading">Les Outils du Quotidien</h2>
+            <p class="panel-text">
+                On ne se bat pas avec des armes rouillées. Voici ce que nous utilisons pour remplacer l'Empire :
+            </p>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1rem; font-family: monospace;">
+                <div style="border: 1px solid var(--color-text-dim); padding: 0.5rem;">
+                    <span class="text-highlight">> OS :</span> Linux Mint / Debian
+                </div>
+                <div style="border: 1px solid var(--color-text-dim); padding: 0.5rem;">
+                    <span class="text-highlight">> BUREAUTIQUE :</span> LibreOffice
+                </div>
+                <div style="border: 1px solid var(--color-text-dim); padding: 0.5rem;">
+                    <span class="text-highlight">> CLOUD :</span> Nextcloud
+                </div>
+                <div style="border: 1px solid var(--color-text-dim); padding: 0.5rem;">
+                    <span class="text-highlight">> VISIO :</span> BigBlueButton
+                </div>
+            </div>
+        </div>
+
+        <div class="grid-item span-full" style="background: transparent; border: none; box-shadow: none; min-height: auto; padding: 2rem 0; display: flex; justify-content: center; align-items: center;">
+            
+            <a href="index.html" style="
+                background-color: var(--color-accent-alert); 
+                color: rgb(0, 0, 0); 
+                text-decoration: none; 
+                font-family: inherit; 
+                font-weight: 800; 
+                font-size: 1.1rem; 
+                padding: 12px 30px; 
+                border: 2px solid rgb(0, 0, 0); 
+                box-shadow: rgb(0, 0, 0) 4px 4px 0px; 
+                display: inline-flex; 
+                align-items: center; 
+                gap: 10px; 
+                transition: transform 0.1s, box-shadow 0.1s; 
+                text-transform: uppercase; 
+                letter-spacing: 1px; 
+                transform: translate(0px, 0px);
+            " 
+            onmouseover="this.style.transform='translate(-2px, -2px)'; this.style.boxShadow='6px 6px 0px #000'" 
+            onmouseout="this.style.transform='translate(0, 0)'; this.style.boxShadow='4px 4px 0px #000'">
+                <span style="font-size: 1.2em;">←</span> RETOUR À L'ACCUEIL
+            </a>
+
+        </div>
+
+    </div>
+
+    <footer class="footer-panel">
+        <div class="footer-col">
+            <strong>REJOINDRE LE RÉSEAU</strong>
+            <small>Contactez votre référent numérique de proximité</small>
+        </div>
+        <div class="footer-col align-right">
+            <strong>PROJET NIRD</strong>
+            <small>Nuit de l'Info 2025</small>
+        </div>
+    </footer>
+
+</body>
+</html>
