@@ -311,3 +311,44 @@ body.is-grabbing {
 .attentionEmoji {
     width: 24px; height: 24px; vertical-align: middle; margin: 0 5px;
 }
+
+/*
+ * Nouveau Style du bouton d'action "ENTRER DANS LA FORGE"
+ * Inversion des couleurs et ajout d'un effet GLOW.
+ */
+.btn-forge {
+    /* Style de base inversé (fond sombre, texte clair/alert) */
+    background-color: var(--color-bg-secondary, #1a1a1a); /* Fond sombre par défaut */
+    color: var(--color-accent-alert, #ff6b6b); /* Couleur d'alerte pour le texte */
+    text-decoration: none;
+    font-family: inherit;
+    font-weight: 800;
+    font-size: 1.1rem;
+    padding: 12px 30px;
+    
+    /* Effet GLOW stylé */
+    border: 2px solid var(--color-accent-alert, #ff6b6b);
+    box-shadow: 0 0 10px var(--color-accent-alert, #ff6b6b), /* Lueur autour */
+                0 0 20px rgba(255, 107, 107, 0.5); /* Lueur plus diffuse */
+    
+    /* Mise en page */
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    
+    /* Transition pour l'effet de survol (hover) */
+    transition: all 0.2s ease-in-out;
+}
+
+/* Effet de survol (Hover) : Augmente la luminosité */
+.btn-forge:hover {
+    background-color: var(--color-accent-alert, #ff6b6b); /* Le fond devient clair */
+    color: var(--color-bg-primary, #000); /* Le texte devient sombre */
+    /* Doublement de la lueur */
+    box-shadow: 0 0 15px var(--color-accent-alert, #ff6b6b),
+                0 0 30px rgba(255, 107, 107, 0.8);
+    /* Optionnel: pour simuler un petit "pop" visuel */
+    transform: scale(1.02); 
+}
