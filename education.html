@@ -3,129 +3,128 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NIRD - LE VILLAGE RÉSISTANT</title>
+    <title>NIRD - RÉSISTANCE</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styleAcademie.css">
 </head>
-<body class="page-academie" data-pixel-art>
+<body class="theme-resistance">
 
-    <div id="boot-sequence" class="boot-overlay">
-        <div class="boot-terminal">
-            <p>> SYSTÈME: ÉTABLISSEMENT SCOLAIRE... [DÉTECTÉ]</p>
-            <p>> ANALYSE: PARC INFORMATIQUE...</p>
-            <p class="text-alert">> ALERTE: FIN SUPPORT WINDOWS 10 IMMINENTE</p>
-            <p>> MENACE: OBSOLESCENCE PROGRAMMÉE PAR L'EMPIRE</p>
-            <p>> SOLUTION: PROTOCOLE "DAVID CONTRE GOLIATH"</p>
-            <p>> CHARGEMENT DU VILLAGE RÉSISTANT...</p>
-            <p>> ACCÈS FORGE DES COMMUNS... [ACCORDÉ]</p>
-            <p class="blink">_</p>
+    <div class="noise-overlay"></div>
+    <div class="vignette-overlay"></div>
+
+    <div id="boot-sequence" class="boot-screen">
+        <div class="terminal-text">
+            <p>> CIBLE : BIG TECH EMPIRE</p>
+            <p>> STATUT : <span class="blink-red">CRITIQUE</span></p>
+            <p>> CHARGEMENT PROTOCOLE "DAVID"</p>
+            <p>> [||||||||||||||||||||] 100%</p>
+            <p>> BIENVENUE DANS LA RÉSISTANCE.</p>
         </div>
     </div>
 
-    <div class="ui-scanlines"></div>
-    <div class="ui-vignette"></div>
-    <div class="ui-noise"></div>
-
-    <div class="grid-container">
-        <div class="corner-deco top-left"></div>
-        <div class="corner-deco top-right"></div>
-        <div class="corner-deco bottom-left"></div>
-        <div class="corner-deco bottom-right"></div>
-
-        <header class="grid-item span-full header-panel">
-            <div class="panel-meta">
-                <span class="meta-tag">STATUT: <span class="text-forge blink-slow">EN RÉSISTANCE</span></span>
-                <span class="meta-tag">NUIT DE L'INFO 2025</span>
-                <a href="index.html" class="btn-home-alert">[ <span class="blink">█</span> QUITTER L'EMPIRE ]</a> 
+    <div class="main-wrapper">
+        
+        <header class="brutal-header">
+            <div class="top-bar">
+                <span>NUIT DE L'INFO 2025</span>
+                <span class="glitch-text" data-text="NO SIGNAL">CANAL SÉCURISÉ</span>
+                <a href="index.html" class="btn-back">RETOUR</a>
             </div>
-            
-            <div class="title-wrapper">
-                <div class="hero-title-wrapper">
-                    <img src="src/img/logo-gauche.png" alt="Logo" class="hero-logo left"> 
-                    
-                    <div style="text-align: center; position: relative; z-index: 10;">
-                        <p class="hero-supra">OPÉRATION</p>
-                        <h1 class="hero-title glitch-effect" data-text="RÉSISTANCE">RÉSISTANCE</h1>
-                        <p class="hero-subtitle text-silver">> Le Village Numérique vs Big Tech</p>
-                    </div>
 
-                    <img src="src/img/logo-droit.png" alt="Logo" class="hero-logo right">
+            <div class="hero-section">
+                <div class="logo-container">
+                     <img src="src/img/logoNIRD.png" class="bw-logo" alt="Logo">
                 </div>
+                
+                <div class="title-block">
+                    <h2 class="sub-hero">PROJET N.I.R.D</h2>
+                    <h1 class="mega-title glitch-layers" data-text="RÉSISTANCE">RÉSISTANCE</h1>
+                    <p class="hero-caption">LE VILLAGE NUMÉRIQUE CONTRE L'EMPIRE</p>
+                </div>
+
+                <div class="logo-container">
+                    <img src="src/img/logoNIRD.png" class="bw-logo" alt="Logo">
+               </div>
             </div>
         </header>
 
-        <div class="grid-item span-full ticker-panel led-matrix">
-            <div class="ticker-track">
-                <span>▓▒░ [ ALERTE : FIN W10 ] ░▒▓ /// ▓▒░ [ MISSION : SAUVER LE MATÉRIEL ] ░▒▓ /// ▓▒░ [ REJOINDRE LA FORGE DES COMMUNS ] ░▒▓ /// </span>
-                <span>▓▒░ [ ALERTE : FIN W10 ] ░▒▓ /// ▓▒░ [ MISSION : SAUVER LE MATÉRIEL ] ░▒▓ /// ▓▒░ [ REJOINDRE LA FORGE DES COMMUNS ] ░▒▓ /// </span>
+        <div class="scrolling-alert">
+            <div class="track">
+                ALERTE : FIN SUPPORT WINDOWS 10 IMMINENTE /// OBSOLESCENCE PROGRAMMÉE DÉTECTÉE /// REJOIGNEZ LE VILLAGE NIRD /// ALERTE : FIN SUPPORT WINDOWS 10 IMMINENTE /// 
             </div>
         </div>
-        
-        <section class="grid-item span-full content-panel border-right">
-             <div class="panel-meta"><span class="text-alert">ANALYSE DE LA MENACE</span></div>
-             <h2 class="panel-heading text-alert">⚠️ David contre Goliath</h2>
-             <p class="panel-text">
-                 L'Empire Numérique impose sa loi : licences coûteuses, données hors UE, et écosystèmes fermés. 
-                 Face à ce Goliath, l'École doit devenir un <strong>Village Résistant</strong>, ingénieux et autonome, à l'image du célèbre village gaulois.
-             </p>
-             
-             <div class="data-grid" style="margin-top: 2rem;">
-                <div class="data-point warning">
-                    <span class="data-value">2025</span>
-                    <span class="data-label">FIN SUPPORT W10</span>
+
+        <div class="content-grid">
+            
+            <section class="grid-box span-2">
+                <div class="box-header">
+                    <span class="box-icon">⚠️</span>
+                    <h3>DAVID CONTRE GOLIATH</h3>
                 </div>
-                <div class="data-point success">
-                    <span class="data-value">100%</span>
-                    <span class="data-label">LIBRE & ÉTHIQUE</span>
+                <div class="box-content">
+                    <p>
+                        L'Empire Numérique est puissant. Matériel obsolète, licences hors de prix, données volées. 
+                        <strong>L'école est prise en otage.</strong>
+                    </p>
+                    <p>
+                        La fin de Windows 10 en 2025 est le point de rupture. 
+                        Il est temps de passer à l'offensive.
+                    </p>
+                    
+                    <div class="stat-row">
+                        <div class="stat-item">
+                            <span class="stat-number glitch-text" data-text="2025">2025</span>
+                            <span class="stat-label">FIN DU MONDE (W10)</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number text-red">NON</span>
+                            <span class="stat-label">AU GASPILLAGE</span>
+                        </div>
+                    </div>
                 </div>
+            </section>
+
+            <section class="grid-box span-1 inverted">
+                <div class="box-header">
+                    <h3>// CODE N.I.R.D</h3>
+                </div>
+                <ul class="clean-list">
+                    <li><span class="letter-highlight">N</span>umérique</li>
+                    <li><span class="letter-highlight">I</span>nclusif</li>
+                    <li><span class="letter-highlight">R</span>esponsable</li>
+                    <li><span class="letter-highlight">D</span>urable</li>
+                </ul>
+                <p class="small-print" style="margin-top: 1rem;">
+                    "Redonner le pouvoir d'agir aux équipes."
+                </p>
+            </section>
+
+            <div class="grid-box span-full center-content" style="border: none;">
+                <a href="forge.html" class="mega-btn glitch-hover">
+                    <span class="btn-text">ACCÉDER À LA FORGE</span>
+                    <span class="btn-sub">REJOINDRE LE VILLAGE</span>
+                </a>
             </div>
-        </section>
 
-        <section class="grid-item span-full content-panel" style="background: #0e0e0e;">
-            <div class="panel-meta"><span>PROTOCOLE N.I.R.D</span></div>
-            <h2 class="panel-heading">Les Piliers du Village</h2>
-            <p class="panel-text">
-                Notre arme secrète ? Une démarche progressive pour reprendre le pouvoir d'agir.
-            </p>
-            <ul class="manifesto-list">
-                <li><strong class="text-forge">N</strong>umérique : Un outil, pas une contrainte.</li>
-                <li><strong class="text-forge">I</strong>nclusif : Pour ne laisser personne de côté.</li>
-                <li><strong class="text-forge">R</strong>esponsable : Éthique et protection des données.</li>
-                <li><strong class="text-forge">D</strong>urable : Contre le gaspillage et l'obsolescence.</li>
-            </ul>
-        </section>
-
-        <div class="grid-item span-full forge-section">
-            <p class="text-center" style="margin-bottom: 1rem; color: #888;">[ REJOINDRE LA COMMUNAUTÉ ]</p>
-            <a href="forge.html" class="btn-forge">
-                <span class="btn-icon">⚒️</span> ENTRER DANS LA FORGE <span class="btn-arrow-icon">→</span>
-            </a>
-            <small style="margin-top: 1rem; display:block; color: #555;">La Forge des Communs Numériques Éducatifs</small>
         </div>
 
-        <footer class="grid-item span-full footer-panel">
-            <div class="footer-col">
-                <strong>INITIATIVE</strong>
-                <small>Collectif enseignant NIRD & Nuit de l'Info 2025</small>
-            </div>
-            <div class="footer-col align-right">
-                <strong>LICENCE</strong>
-                <small class="text-forge">LIBRE DE DROIT (Open Source)</small>
-            </div>
+        <footer class="brutal-footer">
+            <div>NUIT DE L'INFO 2025</div>
+            <div class="text-red">by goonmaxxers</div>
+            <div>[ NIRD_SYS_V2.0 ]</div>
         </footer>
 
     </div>
-    
+
     <script>
+        // Script simple pour supprimer l'écran de boot
         document.addEventListener("DOMContentLoaded", () => {
             setTimeout(() => {
-                const bootScreen = document.getElementById('boot-sequence');
-                if(bootScreen) {
-                    bootScreen.style.opacity = '0';
-                    setTimeout(() => bootScreen.remove(), 1000);
-                }
-            }, 4000); 
+                const boot = document.getElementById('boot-sequence');
+                boot.style.opacity = 0;
+                setTimeout(()=> boot.remove(), 500);
+            }, 2500);
         });
     </script>
 </body>
