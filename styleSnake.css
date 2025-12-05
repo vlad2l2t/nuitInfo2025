@@ -1,19 +1,29 @@
+/* --- VARIABLES --- */
 :root {
-    /* Palette */
+    /* Couleurs */
     --color-bg-primary: #0a0a0a;
     --color-bg-secondary: #111111;
     --color-text-main: #e0e0e0;
     --color-text-muted: #888888;
     --color-accent-alert: #cc0000;
     --color-accent-silver: #c0c0c0; 
+    
+    /* Structure */
     --grid-gap: 0px;
     --border-width: 2px;
     --border-color: #2a2a2a;
+    
+    /* Polices */
     --font-display: 'Anton', sans-serif;
     --font-mono: 'Space Mono', monospace;
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
+/* --- BASE --- */
+* { 
+    box-sizing: border-box; 
+    margin: 0; 
+    padding: 0; 
+}
 
 body {
     background-color: var(--color-bg-primary);
@@ -22,11 +32,12 @@ body {
     overflow-x: hidden;
     line-height: 1.5;
     min-height: 100vh;
-    /* Curseur */
     cursor: crosshair;
 }
 
-/* EFFETS UI (Scanlines, Vignette, Noise) */
+/* --- EFFETS VISUELS --- */
+
+/* Lignes de balayage (Scanlines) */
 .crt-scanlines {
     position: fixed; inset: 0; pointer-events: none; z-index: 90;
     background-position: 0 0; 
@@ -35,13 +46,18 @@ body {
     animation: scanlines-move 6s linear infinite;
     opacity: 0.7; 
 }
-@keyframes scanlines-move { from { background-position: 0 0; } to { background-position: 0 4px; } }
+@keyframes scanlines-move { 
+    from { background-position: 0 0; } 
+    to { background-position: 0 4px; } 
+}
 
+/* Vignette (Coins sombres) */
 .ui-vignette {
     position: fixed; inset: 0; pointer-events: none; z-index: 91;
     background: radial-gradient(circle, transparent 60%, rgba(0,0,0,0.4) 100%);
 }
 
+/* Bruit visuel (Grain) */
 .ui-noise {
     position: fixed; inset: 0; pointer-events: none; z-index: 89;
     opacity: 0.05;
@@ -49,7 +65,7 @@ body {
     background-size: 200px 200px;
 }
 
-/* LAYOUT */
+/* --- GRILLE (LAYOUT) --- */
 .grid-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -58,24 +74,30 @@ body {
     margin: 2rem auto;
     border: var(--border-width) solid var(--border-color);
 }
+
 .grid-item {
     position: relative;
     border-bottom: var(--border-width) solid var(--border-color);
     overflow: hidden;
 }
+
+/* Gestion des colonnes */
 .span-full { grid-column: 1 / -1; }
 .span-double { grid-column: span 2; }
 .span-single { grid-column: span 1; }
 .border-right { border-right: var(--border-width) solid var(--border-color); }
+
+/* Utilitaires texte */
 .text-alert { color: var(--color-accent-alert); }
 .text-muted { color: var(--color-text-muted); }
 
-/* HEADER */
+/* --- EN-TÊTE --- */
 .header-panel {
     padding: 2rem;
     background: radial-gradient(circle at top, #1a1a1a, #000);
     text-align: center;
 }
+
 .hero-title {
     font-family: var(--font-display);
     font-size: clamp(3rem, 6vw, 5rem);
@@ -83,6 +105,7 @@ body {
     text-transform: uppercase;
     letter-spacing: -2px;
 }
+
 .panel-meta {
     display: flex; justify-content: center; gap: 2rem;
     font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px;
@@ -90,7 +113,7 @@ body {
     color: var(--color-text-muted);
 }
 
-/* TICKER */
+/* --- BANDEAU DÉFILANT --- */
 .ticker-panel {
     background: var(--color-accent-alert);
     color: #000;
@@ -100,17 +123,27 @@ body {
     white-space: nowrap;
     overflow: hidden;
 }
-.ticker-track { display: inline-block; animation: scroll 20s linear infinite; }
-@keyframes scroll { from {transform: translateX(0);} to {transform: translateX(-50%);} }
 
-/* JEU & SIDEBAR */
+.ticker-track { 
+    display: inline-block; 
+    animation: scroll 20s linear infinite; 
+}
+@keyframes scroll { 
+    from {transform: translateX(0);} 
+    to {transform: translateX(-50%);} 
+}
+
+/* --- JEU ET SIDEBAR --- */
 .content-panel {
     padding: 2rem;
     display: flex; flex-direction: column; justify-content: flex-start;
 }
+
+/* Affichage des scores */
 .data-value { font-family: var(--font-display); font-size: 3.5rem; line-height: 1; display: block; }
 .data-label { font-size: 0.75rem; color: var(--color-text-muted); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 1rem;}
 
+/* Zone du Canvas (Jeu) */
 #game-wrapper {
     display: flex;
     justify-content: center;
@@ -121,12 +154,14 @@ body {
     min-height: 400px;
     position: relative;
 }
+
 canvas {
     border: 1px solid #333;
     box-shadow: 0 0 20px rgba(0,0,0,0.8);
     max-width: 100%; 
 }
 
+/* Instructions touches */
 .controls-info {
     margin-top: auto;
     font-size: 0.8rem;
@@ -134,10 +169,12 @@ canvas {
     border-top: 1px solid #333;
     padding-top: 1rem;
 }
+
 .key {
     display: inline-block; border: 1px solid #444; padding: 2px 6px; border-radius: 4px; color: var(--color-text-main); margin: 0 2px;
 }
 
+/* --- OVERLAYS (Superpositions) --- */
 #game-over-overlay, #loading-overlay {
     position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
     background: rgba(0,0,0,0.9); border: 2px solid var(--color-accent-alert);
@@ -146,6 +183,7 @@ canvas {
 #game-over-overlay { display: none; }
 #loading-overlay { display: block; }
 
+/* Bouton Redémarrer */
 .btn-restart {
     background: var(--color-accent-alert); border: none; color: #000;
     font-family: var(--font-display); font-size: 1.5rem; padding: 0.5rem 1.5rem;
@@ -153,33 +191,26 @@ canvas {
 }
 .btn-restart:hover { background: #fff; }
 
+/* --- PIED DE PAGE --- */
 .footer-panel {
     padding: 1rem 2rem; background: #050505;
     display: flex; justify-content: space-between;
     border-top: 4px solid var(--color-accent-alert);
 }
 
-@media (max-width: 900px) {
-    .grid-container { grid-template-columns: 1fr; }
-    .span-double, .span-single { grid-column: 1 / -1; }
-    .border-right { border-right: none; }
-}
+/* --- BOUTON RETRO (Footer) --- */
 .btn-footer-retro {
-    /* Style de la police */
-    font-family: var(--font-mono); /* Space Mono, police code */
+    font-family: var(--font-mono); 
     font-size: 0.9rem;
     font-weight: 700;
     
-    /* Couleurs et bordures */
-    color: var(--color-text-main, #e0e0e0); /* Blanc/Gris clair par défaut */
+    color: var(--color-text-main, #e0e0e0); 
     background: transparent;
     text-decoration: none;
     text-transform: uppercase;
     
-    /* Padding pour la zone cliquable */
     padding: 0.5rem 1rem;
     
-    /* Bordure type 'Système' */
     border: 2px solid var(--color-text-main, #e0e0e0);
     box-shadow: 0 0 5px rgba(224, 224, 224, 0.4);
     
@@ -187,22 +218,28 @@ canvas {
     display: inline-block;
 }
 
-/* Curseur clignotant (le underscore '_') */
+/* Curseur clignotant */
 .btn-footer-retro > span:last-child {
     font-weight: 900;
     animation: blinker 1s step-end infinite;
 }
 
-/* Effet de survol (Hover): Passe en mode alerte (ROUGE) */
+/* Survol bouton */
 .btn-footer-retro:hover {
-    color: var(--color-bg-primary, #000); /* Le texte devient noir */
-    background: var(--color-accent-alert, #cc0000); /* Le fond devient rouge */
+    color: var(--color-bg-primary, #000); 
+    background: var(--color-accent-alert, #cc0000); 
     border-color: var(--color-accent-alert, #cc0000); 
-    box-shadow: 0 0 15px var(--color-accent-alert, #cc0000); /* Lueur rouge intense */
-    transform: translateY(-2px); /* Léger décalage pour effet 3D */
+    box-shadow: 0 0 15px var(--color-accent-alert, #cc0000); 
+    transform: translateY(-2px); 
 }
 
-/* Animation pour le clignotement */
 @keyframes blinker {
     50% { opacity: 0; }
+}
+
+/* --- MOBILE --- */
+@media (max-width: 900px) {
+    .grid-container { grid-template-columns: 1fr; }
+    .span-double, .span-single { grid-column: 1 / -1; }
+    .border-right { border-right: none; }
 }

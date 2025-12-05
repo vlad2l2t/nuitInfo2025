@@ -26,7 +26,7 @@
             <p class="hero-subtitle" style="font-family: 'Space Mono'; font-size: 1rem; margin-top: 1rem;">Simulation de <span class="text-alert">snake</span> Open Source</p>
         </div>
 
-       <div class="grid-item span-full ticker-panel">
+        <div class="grid-item span-full ticker-panel">
             <div class="ticker-track">
                 <span class="ticker-content">
                     MISSION: CONSOMMER POMME PROPRIÉTAIRE // ÉVITER PANIC NOYAU (MURS) // NE PAS MORDRE VOTRE PROPRE QUEUE // DÉPLOIEMENT UNITÉ TUX... // CONSOMMER POMME PROPRIÉTAIRE // ÉVITER PANIC NOYAU (MURS) // UTILISER 9.9.9.9 // 
@@ -97,23 +97,30 @@
     </div>
 
     <script>
+        // --- CONFIGURATION ---
         const canvas = document.getElementById('gameCanvas');
         const ctx = canvas.getContext('2d');
+        
+        // Éléments HTML
         const scoreElement = document.getElementById('score');
         const highScoreElement = document.getElementById('highScore');
         const logElement = document.getElementById('game-log');
         const gameOverOverlay = document.getElementById('game-over-overlay');
         const loadingOverlay = document.getElementById('loading-overlay');
 
+        // Styles et Couleurs
         const style = getComputedStyle(document.body);
         const colorSnakeBody = style.getPropertyValue('--color-text-main').trim();
         const colorFoodGlow = style.getPropertyValue('--color-accent-alert').trim();
         const colorBg = '#050505';
         const colorGrid = '#151515';
 
+        // Paramètres de grille
         const gridSize = 20;
         const tileCountX = canvas.width / gridSize;
         const tileCountY = canvas.height / gridSize;
+
+        // --- CHARGEMENT DES IMAGES ---
         let assetsLoaded = false;
         let assetsCount = 0;
         const totalAssets = 2;
@@ -136,6 +143,7 @@
             }
         }
 
+        // --- ÉTAT DU JEU ---
         let score = 0;
         let highScore = localStorage.getItem('tuxHighScore') || 0;
         highScoreElement.innerText = highScore.toString().padStart(3, '0');
@@ -147,24 +155,29 @@
         let gameRunning = false;
         let gameSpeed = 110;
 
+        // Fonction pour écrire dans le terminal
         function log(msg) {
             const time = new Date().toLocaleTimeString('fr-FR', {hour12: false, hour: "numeric", minute: "numeric", second: "numeric"});
             logElement.innerHTML = `> [${time}] ${msg}<br>` + logElement.innerHTML;
         }
 
+        // --- BOUCLE PRINCIPALE ---
         function drawGame() {
             if (!assetsLoaded || !gameRunning) {
                  if(!assetsLoaded && gameRunning) setTimeout(drawGame, 100);
                  return;
             }
 
+            // Calcul de la nouvelle tête
             const head = {x: snake[0].x + dx, y: snake[0].y + dy};
 
+            // Vérification collisions Murs
             if (head.x < 0 || head.x >= canvas.width || head.y < 0 || head.y >= canvas.height) {
                 gameOver("Collision murale.");
                 return;
             }
-            // Collisions Soi-même
+            
+            // Vérification collisions Serpent (soi-même)
             for (let i = 0; i < snake.length; i++) {
                 if (head.x === snake[i].x && head.y === snake[i].y) {
                     gameOver("Auto-cannibalisme détecté.");
@@ -174,37 +187,43 @@
 
             snake.unshift(head);
 
+            // Manger la pomme
             if (head.x === food.x && head.y === food.y) {
                 score += 1;
                 scoreElement.innerText = score.toString().padStart(3, '0');
                 log("Pomme consommée. Logiciel propriétaire retiré.");
                 generateFood();
+                // Accélération progressive
                 if(gameSpeed > 60) gameSpeed -= 2; 
             } else {
                 snake.pop();
             }
 
+            // Dessiner le fond
             ctx.fillStyle = colorBg;
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
+            // Dessiner la grille
             ctx.strokeStyle = colorGrid;
             ctx.lineWidth = 1;
             ctx.beginPath();
             for(let i=0; i<tileCountX; i++) { ctx.moveTo(i*gridSize, 0); ctx.lineTo(i*gridSize, canvas.height); }
             for(let j=0; j<tileCountY; j++) { ctx.moveTo(0, j*gridSize); ctx.lineTo(canvas.width, j*gridSize); }
             ctx.stroke();
+            
+            // Dessiner le serpent
             snake.forEach((part, index) => {
                 if(index === 0) {
-                    // Tux (Head)
+                    // Tête (Tux)
                     ctx.drawImage(tuxImg, part.x - 2, part.y - 2, gridSize + 4, gridSize + 4);
                 } else {
-                    // Body
+                    // Corps
                     ctx.fillStyle = colorSnakeBody;
                     ctx.fillRect(part.x + 2, part.y + 2, gridSize - 4, gridSize - 4);
                 }
             });
 
-            // Pomme
+            // Dessiner la pomme
             ctx.shadowBlur = 20;
             ctx.shadowColor = colorFoodGlow;
             ctx.drawImage(appleImg, food.x, food.y, gridSize, gridSize);
@@ -213,16 +232,19 @@
             setTimeout(drawGame, gameSpeed);
         }
 
+        // Placer la nourriture aléatoirement
         function generateFood() {
             food = {
                 x: Math.floor(Math.random() * tileCountX) * gridSize,
                 y: Math.floor(Math.random() * tileCountY) * gridSize
             };
+            // Éviter de placer sur le serpent
             snake.forEach(part => {
                 if (part.x === food.x && part.y === food.y) generateFood();
             });
         }
 
+        // Gestion fin de partie
         function gameOver(reason) {
             gameRunning = false;
             log("PANIC NOYAU: " + reason);
@@ -234,6 +256,7 @@
             }
         }
 
+        // Réinitialisation
         function resetGame() {
             if(!assetsLoaded) return;
             snake = [
@@ -251,6 +274,7 @@
             drawGame();
         }
 
+        // --- CONTRÔLES CLAVIER ---
         document.addEventListener('keydown', changeDirection);
 
         function changeDirection(event) {
@@ -258,6 +282,7 @@
             const UP_KEY = 38;   const DOWN_KEY = 40;
             const keyPressed = event.keyCode;
 
+            // Empêche le défilement de la page
             if ([LEFT_KEY, RIGHT_KEY, UP_KEY, DOWN_KEY].includes(keyPressed)) {
                 event.preventDefault();
             }

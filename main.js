@@ -1,3 +1,4 @@
+// Changement du curseur au clic
 document.addEventListener('mousedown', () => {
     document.body.classList.add('is-grabbing');
 });
@@ -6,13 +7,14 @@ document.addEventListener('mouseup', () => {
     document.body.classList.remove('is-grabbing');
 });
 
+// Lancement au chargement de la page
 document.addEventListener("DOMContentLoaded", () => {
     
-    // Duplication pour le ticker
+    // 1. Duplication du texte défilant (pour fluidité)
     const track = document.querySelector('.ticker-track');
     if (track) track.innerHTML = track.innerHTML.repeat(4);
 
-    // Compteur d'uptime
+    // 2. Compteur de temps (Uptime)
     const uptimeElement = document.getElementById('uptime-counter');
     let seconds = 0;
     
@@ -25,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     setInterval(updateUptime, 1000);
 
-    // TXT Scramble
+    // 3. Animation "Hacker" sur le titre
     const title = document.querySelector('.hero-title');
     if (title) {
         const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -43,20 +45,25 @@ document.addEventListener("DOMContentLoaded", () => {
                     .map((letter, index) => {
                         if (letter === " ") return " ";
                         
+                        // Affiche la vraie lettre si l'itération est passée
                         if (index < Math.floor(iteration)) {
                             return originalText[index];
                         }
                         
+                        // Sinon affiche un caractère aléatoire
                         return letters[Math.floor(Math.random() * lettersLen)];
                     })
                     .join("");
             
+                // Fin de l'animation
                 if (iteration >= originalText.length) { 
                     clearInterval(interval);
                 }
                 iteration += 0.5; 
             }, 35);
         };
+        
+        // Déclenche l'effet au début et au survol
         scramble();
         title.addEventListener('mouseover', scramble);
     }
