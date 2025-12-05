@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SNAKE! // TUX vs APPLE</title>
+    <title>SNAKE! // TUX contre APPLE</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styleSnake.css">
@@ -18,66 +18,66 @@
         
         <div class="grid-item span-full header-panel">
             <div class="panel-meta">
-                <span>OS: Linux Kernel 6.x</span>
-                <span>Target: Apple Corp.</span>
-                <span>User: Root</span>
+                <span>OS: Noyau Linux 6.9</span>
+                <span>Cible: Société Apple</span>
+                <span>Utilisateur: Root</span>
             </div>
-            <h1 class="hero-title">TUX <span class="text-alert">PROTOCOL</span></h1>
-            <p class="hero-subtitle" style="font-family: 'Space Mono'; font-size: 1rem; margin-top: 1rem;">Open Source Consumption Simulation</p>
+            <h1 class="hero-title">PROTOCOLE <span class="text-alert">snake</span></h1>
+            <p class="hero-subtitle" style="font-family: 'Space Mono'; font-size: 1rem; margin-top: 1rem;">Simulation de <span class="text-alert">snake</span> Open Source</p>
         </div>
 
        <div class="grid-item span-full ticker-panel">
-    <div class="ticker-track">
-        <span class="ticker-content">
-            MISSION: CONSUME PROPRIETARY APPLE // AVOID KERNEL PANIC (WALLS) // DO NOT BITE YOUR OWN TAIL // DEPLOYING TUX UNIT... // CONSUME PROPRIETARY APPLE // AVOID 	    KERNEL PANIC (WALLS) // USE 9.9.9.9 // 
-            RULE THEM ALL... // f25a2fc72690b780b2a14e140ef6a9e0 // DEPLOYING TUX UNIT... //
-        </span>
-        
-        <span class="ticker-content">
-            MISSION: CONSUME PROPRIETARY APPLE // AVOID KERNEL PANIC (WALLS) // DO NOT BITE YOUR OWN TAIL // DEPLOYING TUX UNIT... // CONSUME PROPRIETARY APPLE // AVOID 	    KERNEL PANIC (WALLS) // USE 9.9.9.9 // 
-            RULE THEM ALL... // f25a2fc72690b780b2a14e140ef6a9e0 // DEPLOYING TUX UNIT... //
-        </span>
-    </div>
-</div>
+            <div class="ticker-track">
+                <span class="ticker-content">
+                    MISSION: CONSOMMER POMME PROPRIÉTAIRE // ÉVITER PANIC NOYAU (MURS) // NE PAS MORDRE VOTRE PROPRE QUEUE // DÉPLOIEMENT UNITÉ TUX... // CONSOMMER POMME PROPRIÉTAIRE // ÉVITER PANIC NOYAU (MURS) // UTILISER 9.9.9.9 // 
+                    LES DOMINER TOUS... // f25a2fc72690b780b2a14e140ef6a9e0 // DÉPLOIEMENT UNITÉ TUX... //
+                </span>
+                
+                <span class="ticker-content">
+                    MISSION: CONSOMMER POMME PROPRIÉTAIRE // ÉVITER PANIC NOYAU (MURS) // NE PAS MORDRE VOTRE PROPRE QUEUE // DÉPLOIEMENT UNITÉ TUX... // CONSOMMER POMME PROPRIÉTAIRE // ÉVITER PANIC NOYAU (MURS) // UTILISER 9.9.9.9 // 
+                    LES DOMINER TOUS... // f25a2fc72690b780b2a14e140ef6a9e0 // DÉPLOIEMENT UNITÉ TUX... //
+                </span>
+            </div>
+        </div>
 
         <div class="grid-item span-double border-right content-panel" style="padding: 0;">
             <div id="game-wrapper">
                 <canvas id="gameCanvas" width="600" height="400"></canvas>
                 
                 <div id="loading-overlay">
-                    <h2 class="hero-title" style="font-size: 2rem;">INITIALIZING...</h2>
-                    <p class="text-muted">Loading Assets</p>
+                    <h2 class="hero-title" style="font-size: 2rem;">INITIALISATION...</h2>
+                    <p class="text-muted">Chargement des Ressources</p>
                 </div>
 
                 <div id="game-over-overlay">
-                    <h2 class="hero-title text-alert" style="font-size: 3rem;">KERNEL_PANIC</h2>
-                    <p>FAIL!</p>
-                    <button class="btn-restart" onclick="resetGame()">REBOOT SYSTEM</button>
+                    <h2 class="hero-title text-alert" style="font-size: 3rem;">PANIC_NOYAU</h2>
+                    <p>ÉCHEC !</p>
+                    <button class="btn-restart" onclick="resetGame()">REDÉMARRER SYSTÈME</button>
                 </div>
             </div>
         </div>
 
         <div class="grid-item span-single content-panel">
             <div>
-                <span class="data-label">Apples Consumed</span>
+                <span class="data-label">Pommes Consommées</span>
                 <span class="data-value text-alert" id="score">000</span>
             </div>
             
             <div style="margin-top: 3rem;">
-                <span class="data-label">High Score</span>
+                <span class="data-label">Meilleur Score</span>
                 <span class="data-value" id="highScore">000</span>
             </div>
 
             <div style="margin-top: 3rem;">
-                <span class="data-label">Terminal Output</span>
+                <span class="data-label">Sortie du Terminal</span>
                 <div style="font-size: 0.8rem; color: #666; font-family: 'Space Mono'; height: 100px; overflow: hidden; border-left: 2px solid #333; padding-left: 10px;" id="game-log">
-                    > Booting kernel...<br>
+                    > Démarrage du noyau...<br>
                 </div>
             </div>
 
             <div class="controls-info">
-                <p>CONTROLS:</p>
-                <p><span class="key">↑</span> <span class="key">↓</span> <span class="key">←</span> <span class="key">→</span> to Move Tux</p>
+                <p>CONTRÔLES:</p>
+                <p><span class="key">↑</span> <span class="key">↓</span> <span class="key">←</span> <span class="key">→</span> pour déplacer le <br>serpent-pingouin</p>
             </div>
         </div>
 
@@ -85,9 +85,13 @@
             <div class="footer-col">
                 <small>GOONMAXXERS 2K25</small>
             </div>
+            <div class="footer-col center-content">
+                <a href="index.html" class="btn-footer-retro">
+                    > RETOUR ACCUEIL _
+                </a>
+            </div>
             <div class="footer-col align-right">
-                <strong>STATUS: HUNTING</strong>
-                <small class="text-alert">ROOT ACCESS</small>
+                <small>PROTOCOLE SNAKE // OPEN SOURCE</small>
             </div>
         </div>
     </div>
@@ -127,7 +131,7 @@
             if (assetsCount === totalAssets) {
                 assetsLoaded = true;
                 loadingOverlay.style.display = 'none';
-                log("Assets loaded. Starting Tux daemon.");
+                log("Ressources chargées. Démarrage du démon Tux.");
                 resetGame();
             }
         }
@@ -157,13 +161,13 @@
             const head = {x: snake[0].x + dx, y: snake[0].y + dy};
 
             if (head.x < 0 || head.x >= canvas.width || head.y < 0 || head.y >= canvas.height) {
-                gameOver("Wall collision.");
+                gameOver("Collision murale.");
                 return;
             }
             // Collisions Soi-même
             for (let i = 0; i < snake.length; i++) {
                 if (head.x === snake[i].x && head.y === snake[i].y) {
-                    gameOver("Self-cannibalism detected.");
+                    gameOver("Auto-cannibalisme détecté.");
                     return;
                 }
             }
@@ -173,7 +177,7 @@
             if (head.x === food.x && head.y === food.y) {
                 score += 1;
                 scoreElement.innerText = score.toString().padStart(3, '0');
-                log("Apple consumed. Proprietary software removed.");
+                log("Pomme consommée. Logiciel propriétaire retiré.");
                 generateFood();
                 if(gameSpeed > 60) gameSpeed -= 2; 
             } else {
@@ -221,7 +225,7 @@
 
         function gameOver(reason) {
             gameRunning = false;
-            log("KERNEL PANIC: " + reason);
+            log("PANIC NOYAU: " + reason);
             gameOverOverlay.style.display = 'block';
             if (score > highScore) {
                 highScore = score;
@@ -242,7 +246,7 @@
             scoreElement.innerText = "000";
             gameOverOverlay.style.display = 'none';
             gameRunning = true;
-            log("System Rebooted. Tux ready.");
+            log("Système Redémarré. Tux prêt.");
             generateFood();
             drawGame();
         }

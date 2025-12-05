@@ -164,3 +164,45 @@ canvas {
     .span-double, .span-single { grid-column: 1 / -1; }
     .border-right { border-right: none; }
 }
+.btn-footer-retro {
+    /* Style de la police */
+    font-family: var(--font-mono); /* Space Mono, police code */
+    font-size: 0.9rem;
+    font-weight: 700;
+    
+    /* Couleurs et bordures */
+    color: var(--color-text-main, #e0e0e0); /* Blanc/Gris clair par défaut */
+    background: transparent;
+    text-decoration: none;
+    text-transform: uppercase;
+    
+    /* Padding pour la zone cliquable */
+    padding: 0.5rem 1rem;
+    
+    /* Bordure type 'Système' */
+    border: 2px solid var(--color-text-main, #e0e0e0);
+    box-shadow: 0 0 5px rgba(224, 224, 224, 0.4);
+    
+    transition: all 0.2s ease-in-out;
+    display: inline-block;
+}
+
+/* Curseur clignotant (le underscore '_') */
+.btn-footer-retro > span:last-child {
+    font-weight: 900;
+    animation: blinker 1s step-end infinite;
+}
+
+/* Effet de survol (Hover): Passe en mode alerte (ROUGE) */
+.btn-footer-retro:hover {
+    color: var(--color-bg-primary, #000); /* Le texte devient noir */
+    background: var(--color-accent-alert, #cc0000); /* Le fond devient rouge */
+    border-color: var(--color-accent-alert, #cc0000); 
+    box-shadow: 0 0 15px var(--color-accent-alert, #cc0000); /* Lueur rouge intense */
+    transform: translateY(-2px); /* Léger décalage pour effet 3D */
+}
+
+/* Animation pour le clignotement */
+@keyframes blinker {
+    50% { opacity: 0; }
+}

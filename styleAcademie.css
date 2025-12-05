@@ -1,35 +1,60 @@
 :root {
     --c-black: #050505;
     --c-white: #f0f0f0;
-    --c-red: #ff0000; /* Le Rouge pur "Erreur Système" */
+    --c-red: #ff0000;
     --c-gray: #333;
     
-    --font-head: 'Anton', sans-serif;
-    --font-mono: 'Space Mono', monospace;
+    /* CHANGEMENT DE POLICE POUR DU PIXEL ART */
+    --font-head: 'Press Start 2P', cursive;
+    --font-mono: 'VT323', monospace;
     
-    --border-thick: 3px solid var(--c-white);
-    --border-red: 3px solid var(--c-red);
+    /* Bordures plus épaisses et "carrées" */
+    --border-thick: 4px solid var(--c-white);
+    --border-red: 4px solid var(--c-red);
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
+* { 
+    box-sizing: border-box; margin: 0; padding: 0; 
+    /* Force le rendu pixelisé pour les images et scalings */
+    image-rendering: pixelated; 
+}
 
 body {
     background-color: var(--c-black);
     color: var(--c-white);
     font-family: var(--font-mono);
+    font-size: 1.2rem; /* VT323 est un peu petite, on grossit */
     overflow-x: hidden;
-    cursor: crosshair; /* Curseur viseur */
+    cursor: crosshair;
 }
 
 /* --- TEXTURES & BACKGROUNDS --- */
+/* Ajout d'une grille de pixels subtile */
+.pixel-grid-overlay {
+    position: fixed; inset: 0; z-index: 88; pointer-events: none;
+    background-image: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.02));
+    background-size: 100% 2px, 3px 100%;
+}
+
 .noise-overlay {
     position: fixed; inset: 0; z-index: 90; pointer-events: none;
-    opacity: 0.08;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    opacity: 0.1; /* Un peu plus de bruit */
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
 }
 .vignette-overlay {
     position: fixed; inset: 0; z-index: 91; pointer-events: none;
-    background: radial-gradient(circle, transparent 50%, black 100%);
+    background: radial-gradient(circle, transparent 50%, rgba(0,0,0,0.9) 100%);
+}
+
+/* Effet Dithering (Damier) pour la section blanche */
+.dithering-bg {
+    background-image: 
+        linear-gradient(45deg, #ddd 25%, transparent 25%), 
+        linear-gradient(-45deg, #ddd 25%, transparent 25%), 
+        linear-gradient(45deg, transparent 75%, #ddd 75%), 
+        linear-gradient(-45deg, transparent 75%, #ddd 75%);
+    background-size: 4px 4px;
+    background-position: 0 0, 0 2px, 2px -2px, -2px 0px;
 }
 
 /* --- BOOT SCREEN --- */
@@ -40,30 +65,32 @@ body {
     transition: opacity 0.5s;
 }
 .terminal-text p {
-    font-size: 1.2rem; margin-bottom: 0.5rem; color: var(--c-white);
+    font-size: 1.5rem; margin-bottom: 0.5rem; color: var(--c-white);
+    text-shadow: 2px 2px 0px #000; /* Ombre dure */
 }
-.blink-red { color: var(--c-red); animation: blink 0.2s infinite; }
+.blink-red { color: var(--c-red); animation: blink 0.1s infinite; } /* Blink plus rapide style NES */
 
 /* --- TYPOGRAPHIE & UTILITAIRES --- */
-.text-red { color: var(--c-red); }
+.text-red { color: var(--c-red); text-shadow: 2px 2px 0px #300; }
 .glitch-text { position: relative; display: inline-block; }
-/* Petit effet de tremblement permanent */
-.glitch-text:hover { animation: shake 0.5s infinite; color: var(--c-red); }
+.glitch-text:hover { animation: shake 0.2s infinite; color: var(--c-red); }
 
 @keyframes blink { 50% { opacity: 0; } }
 @keyframes shake {
-    0% { transform: translate(1px, 1px); }
-    50% { transform: translate(-1px, -1px); }
-    100% { transform: translate(1px, -1px); }
+    0% { transform: translate(2px, 2px); }
+    50% { transform: translate(-2px, -2px); }
+    100% { transform: translate(2px, -2px); }
 }
 
 /* --- LAYOUT --- */
 .main-wrapper {
     max-width: 1200px; margin: 0 auto;
     position: relative; z-index: 10;
-    border-left: 1px solid var(--c-gray);
-    border-right: 1px solid var(--c-gray);
+    border-left: 4px solid var(--c-gray);
+    border-right: 4px solid var(--c-gray);
+    background: var(--c-black);
     min-height: 100vh;
+    box-shadow: 0 0 0 4px var(--c-black); /* Fake border */
 }
 
 /* --- HEADER --- */
@@ -71,14 +98,27 @@ body {
 
 .top-bar {
     display: flex; justify-content: space-between; align-items: center;
-    font-size: 0.8rem; letter-spacing: 2px; border-bottom: 1px solid var(--c-gray);
+    font-size: 1rem; letter-spacing: 0px; 
+    border-bottom: 2px dashed var(--c-gray); /* Ligne pointillée rétro */
     padding-bottom: 1rem; margin-bottom: 2rem;
+    font-family: var(--font-head);
 }
 .btn-back {
-    color: var(--c-white); text-decoration: none; border: 1px solid var(--c-white);
-    padding: 5px 15px; text-transform: uppercase; transition: 0.3s;
+    color: var(--c-white); text-decoration: none; 
+    border: 2px solid var(--c-white);
+    padding: 10px 15px; 
+    font-family: var(--font-head); font-size: 0.8rem;
+    box-shadow: 4px 4px 0px var(--c-white); /* Ombre dure 8-bit */
+    transition: 0.1s;
+    background: var(--c-black);
 }
-.btn-back:hover { background: var(--c-red); border-color: var(--c-red); }
+.btn-back:hover { 
+    background: var(--c-red); 
+    border-color: var(--c-red); 
+    box-shadow: 4px 4px 0px var(--c-red);
+    transform: translate(2px, 2px); /* Effet "bouton enfoncé" */
+    box-shadow: 2px 2px 0px var(--c-white);
+}
 
 .hero-section {
     display: flex; align-items: center; justify-content: center; gap: 2rem;
@@ -86,65 +126,65 @@ body {
 }
 .bw-logo {
     height: 80px; width: auto;
-    filter: grayscale(100%) contrast(1.5); /* Force le N&B */
-    transition: 0.3s;
+    /* Pixelate l'image pour qu'elle fasse "moche" mais style rétro */
+    image-rendering: pixelated; 
+    filter: grayscale(100%) contrast(200%); /* Contraste extrême pour faire 1-bit */
+    transition: 0.1s;
 }
-.bw-logo:hover { filter: grayscale(0%); } /* La couleur revient au survol */
+.bw-logo:hover { filter: grayscale(0%) contrast(100%); }
 
 .title-block { text-align: center; }
-.sub-hero { font-size: 1.5rem; letter-spacing: 5px; color: var(--c-red); margin-bottom: -10px; }
-.hero-caption { font-size: 1rem; letter-spacing: 3px; background: var(--c-white); color: var(--c-black); display: inline-block; padding: 0 10px; }
+.sub-hero { 
+    font-family: var(--font-mono); 
+    font-size: 2rem; 
+    color: var(--c-red); 
+    margin-bottom: 10px; 
+    text-shadow: 3px 3px 0px #000;
+}
+.hero-caption { 
+    font-size: 1.2rem; 
+    background: var(--c-white); color: var(--c-black); 
+    display: inline-block; padding: 5px 10px; 
+    font-family: var(--font-mono);
+}
 
-/* MEGA TITRE GLITCHÉ */
+/* MEGA TITRE PIXEL */
 .mega-title {
     font-family: var(--font-head);
-    font-size: clamp(4rem, 10vw, 8rem);
-    line-height: 0.9;
-    text-transform: uppercase;
+    font-size: clamp(2.5rem, 6vw, 5rem); /* Un peu plus petit car Press Start est large */
+    line-height: 1.2;
     color: var(--c-white);
     position: relative;
     margin: 10px 0;
+    text-shadow: 6px 6px 0px var(--c-red); /* Grosse ombre dure rouge */
 }
-/* Création des calques de glitch (Rouge et Cyan/Blanc) */
+
+/* Glitch maintenu mais ajusté pour le pixel art */
 .glitch-layers::before, .glitch-layers::after {
     content: attr(data-text);
     position: absolute; top: 0; left: 0; width: 100%; height: 100%;
     background: var(--c-black);
 }
 .glitch-layers::before {
-    left: 3px; text-shadow: -2px 0 var(--c-red);
+    left: 4px; text-shadow: -4px 0 var(--c-red);
     clip-path: inset(20% 0 80% 0);
-    animation: glitch-anim-1 2s infinite linear alternate-reverse;
+    animation: glitch-anim-1 2s infinite steps(2); /* steps(2) pour saccader l'anim */
 }
 .glitch-layers::after {
-    left: -3px; text-shadow: 2px 0 blue; /* Petit artefact bleu pour le contraste */
+    left: -4px; text-shadow: 4px 0 blue; 
     clip-path: inset(80% 0 5% 0);
-    animation: glitch-anim-2 3s infinite linear alternate-reverse;
+    animation: glitch-anim-2 3s infinite steps(2);
 }
-
-@keyframes glitch-anim-1 {
-    0% { clip-path: inset(10% 0 85% 0); }
-    20% { clip-path: inset(80% 0 5% 0); }
-    40% { clip-path: inset(30% 0 50% 0); }
-    60% { clip-path: inset(60% 0 10% 0); }
-    100% { clip-path: inset(0% 0 95% 0); }
-}
-@keyframes glitch-anim-2 {
-    0% { clip-path: inset(50% 0 30% 0); }
-    20% { clip-path: inset(10% 0 60% 0); }
-    100% { clip-path: inset(80% 0 5% 0); }
-}
-
 
 /* --- BANDEAU D'ALERTE --- */
 .scrolling-alert {
     background: var(--c-red); color: var(--c-black);
-    font-weight: bold; font-family: var(--font-head); font-size: 1.5rem;
-    padding: 10px 0; overflow: hidden; white-space: nowrap;
+    font-family: var(--font-head); font-size: 1rem;
+    padding: 15px 0; overflow: hidden; white-space: nowrap;
     border-bottom: var(--border-thick);
+    border-top: var(--border-thick);
 }
-.track { display: inline-block; animation: scroll 10s linear infinite; }
-@keyframes scroll { from {transform: translateX(0);} to {transform: translateX(-50%);} }
+.track { display: inline-block; animation: scroll 8s linear infinite; }
 
 
 /* --- GRILLE DE CONTENU --- */
@@ -153,48 +193,81 @@ body {
     border-bottom: var(--border-thick);
 }
 .grid-box {
-    padding: 3rem; border-right: 1px solid var(--c-gray);
+    padding: 3rem; 
+    border-right: 4px solid var(--c-gray);
     position: relative;
 }
 .span-2 { grid-column: span 2; }
 .span-1 { grid-column: span 1; }
 .span-full { grid-column: 1 / -1; }
 
-.box-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem; border-bottom: 2px solid var(--c-red); padding-bottom: 10px; }
-.box-header h3 { font-family: var(--font-head); font-size: 2rem; text-transform: uppercase; }
+.box-header { 
+    display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem; 
+    border-bottom: 4px solid var(--c-red); padding-bottom: 10px; 
+}
+.box-header h3 { font-family: var(--font-head); font-size: 1.5rem; line-height: 1.5; }
 
-/* Styles spécifiques Inversés (Noir sur Blanc) */
-.inverted { background: var(--c-white); color: var(--c-black); }
+/* Styles inversés avec Dithering */
+.inverted { 
+    background-color: var(--c-white); 
+    color: var(--c-black); 
+}
 .inverted .box-header { border-color: var(--c-black); }
-.inverted .letter-highlight { background: var(--c-black); color: var(--c-white); padding: 0 5px; }
-.inverted li { border-bottom: 1px solid #ccc; padding: 10px 0; font-weight: bold; }
+.inverted .letter-highlight { 
+    background: var(--c-black); color: var(--c-white); 
+    padding: 2px 8px; 
+    font-family: var(--font-head);
+}
+.inverted li { 
+    border-bottom: 2px dashed #999; 
+    padding: 10px 0; font-size: 1.4rem; 
+}
 .clean-list { list-style: none; }
 
 /* Stats */
-.stat-row { display: flex; gap: 3rem; margin-top: 3rem; }
-.stat-number { font-family: var(--font-head); font-size: 4rem; line-height: 1; display: block; }
+.stat-row { display: flex; gap: 3rem; margin-top: 3rem; flex-wrap: wrap; }
+.stat-number { 
+    font-family: var(--font-head); font-size: 2.5rem; 
+    line-height: 1; display: block; margin-bottom: 10px;
+    text-shadow: 4px 4px 0px #333;
+}
+.stat-label { font-family: var(--font-mono); font-size: 1.2rem; }
+.inverted .stat-number { text-shadow: 4px 4px 0px #ccc; }
 
-/* --- MEGA BOUTON --- */
+/* --- MEGA BOUTON ARCADE --- */
 .mega-btn {
     display: block; width: 100%; text-align: center;
     background: var(--c-black); color: var(--c-white);
     text-decoration: none; padding: 4rem 0;
-    border-top: var(--border-thick);
-    transition: 0.2s; position: relative; overflow: hidden;
+    transition: 0.1s; position: relative; overflow: hidden;
+    /* Pas de bordure, on utilise l'ombre pour le relief */
 }
-.btn-text { font-family: var(--font-head); font-size: 3rem; display: block; position: relative; z-index: 2; }
-.btn-sub { font-size: 1rem; letter-spacing: 5px; color: var(--c-red); display: block; margin-top: 10px; position: relative; z-index: 2;}
+.btn-text { 
+    font-family: var(--font-head); font-size: 2rem; 
+    display: block; position: relative; z-index: 2; 
+    text-shadow: 4px 4px 0px var(--c-red);
+}
+.btn-sub { 
+    font-family: var(--font-mono); font-size: 1.2rem; 
+    color: var(--c-red); display: block; margin-top: 15px; 
+    position: relative; z-index: 2;
+}
 
-.mega-btn:hover { background: var(--c-red); color: var(--c-black); }
-.mega-btn:hover .btn-sub { color: var(--c-black); }
-
-/* Effet glitch au survol du bouton */
-.mega-btn:hover .btn-text { animation: shake 0.2s infinite; }
+.mega-btn:hover { 
+    background: var(--c-red); color: var(--c-black); 
+}
+.mega-btn:hover .btn-text { 
+    color: var(--c-black); 
+    text-shadow: 4px 4px 0px var(--c-white);
+    animation: shake 0.1s infinite;
+}
+.mega-btn:hover .btn-sub { color: var(--c-black); font-weight: bold; }
 
 /* --- FOOTER --- */
 .brutal-footer {
     padding: 2rem; display: flex; justify-content: space-between;
-    font-size: 0.8rem; border-top: 1px solid var(--c-gray);
+    font-size: 1rem; border-top: 4px solid var(--c-gray);
+    font-family: var(--font-head);
 }
 
 /* RESPONSIVE */
@@ -202,6 +275,244 @@ body {
     .content-grid { grid-template-columns: 1fr; }
     .span-2, .span-1 { grid-column: span 1; }
     .hero-section { flex-direction: column; }
-    .mega-title { font-size: 3.5rem; }
+    .mega-title { font-size: 2.5rem; }
     .box-content { padding: 0; }
+}
+
+/* --- BOUTON RETRO CRT --- */
+.btn-footer-retro {
+    /* Style de la police */
+    font-family: var(--font-mono, 'VT323', monospace); /* Fallback sur VT323 si dispo */
+    font-size: 1.1rem; /* Un peu plus gros pour la lisibilité pixel */
+    font-weight: 700;
+    letter-spacing: 2px;
+    
+    /* Couleurs de base */
+    color: var(--color-text-main, #e0e0e0);
+    text-decoration: none;
+    text-transform: uppercase;
+    
+    /* Structure */
+    padding: 0.8rem 1.5rem;
+    border: 2px solid var(--color-text-main, #e0e0e0);
+    display: inline-block;
+    position: relative;
+    overflow: hidden; /* Important pour les scanlines */
+    
+    /* EFFET 1 : Lueur interne (CRT Bloom) */
+    text-shadow: 0 0 5px rgba(224, 224, 224, 0.7), 
+                 0 0 10px rgba(224, 224, 224, 0.5);
+    
+    /* EFFET 2 : Fond Scanlines (lignes horizontales) */
+    background: linear-gradient(
+        to bottom,
+        rgba(255,255,255,0) 50%,
+        rgba(0,0,0,0.4) 50%
+    );
+    background-size: 100% 4px; /* Taille des lignes */
+    
+    /* EFFET 3 : Légère ombre portée pour détacher du fond */
+    box-shadow: 0 0 10px rgba(224, 224, 224, 0.2),
+                inset 0 0 20px rgba(0,0,0,0.5); /* Effet écran bombé vers l'intérieur */
+
+    transition: all 0.1s steps(2); /* Transition saccadée pour faire plus robotique */
+}
+
+/* Curseur clignotant */
+.btn-footer-retro > span:last-child {
+    display: inline-block;
+    animation: blinker 1s step-end infinite;
+}
+
+/* --- EFFETS DE SURVOL (HOVER) --- */
+.btn-footer-retro:hover {
+    background-color: var(--color-accent-alert, #cc0000);
+    color: #000;
+    border-color: var(--color-accent-alert, #cc0000);
+    
+    /* Lueur rouge intense */
+    box-shadow: 0 0 20px var(--color-accent-alert, #cc0000),
+                inset 0 0 10px rgba(0,0,0,0.5);
+    
+    /* Suppression du flou de texte pour contraste max en mode alerte */
+    text-shadow: none;
+    
+    /* Animation de tremblement (Glitch) */
+    animation: glitch-skew 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite;
+}
+
+/* Petit effet supplémentaire au clic */
+.btn-footer-retro:active {
+    transform: scale(0.98);
+    background-size: 100% 2px; /* Les scanlines se compressent */
+}
+
+/* --- ANIMATIONS --- */
+
+@keyframes blinker {
+    50% { opacity: 0; }
+}
+
+/* Animation de tremblement pour le survol */
+@keyframes glitch-skew {
+    0% { transform: translate(0) }
+    20% { transform: translate(-2px, 2px) skewX(2deg) }
+    40% { transform: translate(-2px, -2px) skewX(-2deg) }
+    60% { transform: translate(2px, 2px) skewX(2deg) }
+    80% { transform: translate(2px, -2px) skewX(-2deg) }
+    100% { transform: translate(0) }
+}
+/* --- CONFIGURATION DES OVERLAYS (Couchés les unes sur les autres) --- */
+.pixel-grid-overlay,
+.noise-overlay,
+.vignette-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* INDISPENSABLE : permet de cliquer au travers */
+    z-index: 9000; /* Juste au-dessus de tout le reste */
+}
+
+/* 1. LIGNES DE BALAYAGE (SCANLINES) */
+.pixel-grid-overlay {
+    /* Lignes horizontales fines alternées */
+    background: linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0),
+        rgba(255, 255, 255, 0) 50%,
+        rgba(0, 0, 0, 0.2) 50%,
+        rgba(0, 0, 0, 0.2)
+    );
+    background-size: 100% 4px; /* Épaisseur des lignes */
+    opacity: 0.8;
+}
+
+/* 2. EFFET VIGNETTE (Bords sombres et écran bombé) */
+.vignette-overlay {
+    /* Un dégradé radial pour assombrir les coins */
+    background: radial-gradient(
+        circle,
+        rgba(0, 0, 0, 0) 60%,    /* Centre clair */
+        rgba(0, 0, 0, 0.4) 80%,  /* Bords grisés */
+        rgba(0, 0, 0, 0.9) 100%  /* Coins noirs */
+    );
+    
+    /* Optionnel : légère teinte verte pour faire "Matrix/Terminal" */
+    box-shadow: inset 0 0 150px rgba(0, 0, 0, 0.9);
+}
+
+/* 3. BRUIT VISUEL (NOISE/GRAIN) */
+.noise-overlay {
+    /* Image de bruit en base64 (très légère) pour éviter de charger un fichier externe */
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+    opacity: 0.6;
+    mix-blend-mode: overlay; /* Fusionne le grain avec les couleurs du site */
+    
+    /* Animation du grain qui bouge */
+    animation: static-noise 0.5s steps(5) infinite;
+}
+
+/* 4. FLICKER (Scintillement global de l'écran) */
+body.theme-resistance {
+    /* On force le body à prendre tout l'écran */
+    min-height: 100vh;
+    position: relative;
+    background-color: #050505; /* Fond très sombre */
+    
+    /* Légère animation de luminosité (comme un néon fatigué) */
+    animation: screen-flicker 4s infinite;
+    
+    /* Léger flou sur tout le texte pour faire "vieille télé" (Optionnel, si ça pique trop les yeux, enlève-le) */
+    text-shadow: 0 0 1px rgba(255, 255, 255, 0.1); 
+}
+
+/* --- ANIMATIONS --- */
+
+@keyframes static-noise {
+    0% { transform: translate(0, 0); }
+    10% { transform: translate(-5%, -5%); }
+    20% { transform: translate(-10%, 5%); }
+    30% { transform: translate(5%, -10%); }
+    40% { transform: translate(-5%, 15%); }
+    50% { transform: translate(-10%, 5%); }
+    60% { transform: translate(15%, 0); }
+    70% { transform: translate(0, 10%); }
+    80% { transform: translate(-15%, 0); }
+    90% { transform: translate(10%, 5%); }
+    100% { transform: translate(5%, 0); }
+}
+
+@keyframes screen-flicker {
+    0% { opacity: 0.99; }
+    5% { opacity: 0.95; }
+    10% { opacity: 0.99; }
+    15% { opacity: 0.98; }
+    20% { opacity: 0.99; }
+    50% { opacity: 0.97; }
+    80% { opacity: 0.99; }
+    90% { opacity: 0.96; }
+    100% { opacity: 0.99; }
+}
+/* --- LE BRUIT (La neige) --- */
+.noise-overlay {
+    position: fixed;
+    /* On place le calque 'hors' de l'écran et on le fait géant */
+    top: -50%; 
+    left: -50%;
+    right: -50%;
+    bottom: -50%;
+    width: 200%;
+    height: 200vh;
+    
+    pointer-events: none;
+    z-index: 9005; /* Au dessus des scanlines */
+    
+    /* Image de bruit SVG générée en CSS */
+    background: transparent url('http://assets.iceable.com/img/noise-transparent.png') repeat 0 0;
+    background-repeat: repeat;
+    
+    /* C'est ici que la magie opère : animation très rapide */
+    animation: bg-animation .2s infinite;
+    opacity: 0.15; /* Règle ça entre 0.1 (discret) et 0.3 (très visible) */
+    visibility: visible;
+}
+
+/* --- ANIMATION DU BRUIT (Ça secoue dans tous les sens) --- */
+@keyframes bg-animation {
+    0% { transform: translate(0,0) }
+    10% { transform: translate(-5%,-5%) }
+    20% { transform: translate(-10%,5%) }
+    30% { transform: translate(5%,-10%) }
+    40% { transform: translate(-5%,15%) }
+    50% { transform: translate(-10%,5%) }
+    60% { transform: translate(15%,0) }
+    70% { transform: translate(0,10%) }
+    80% { transform: translate(-15%,0) }
+    90% { transform: translate(10%,5%) }
+    100% { transform: translate(5%,0) }
+}
+
+/* --- OPTIONNEL : SCANLINES QUI DÉFILENT LENTEMENT --- */
+/* Ajoute ça si tu veux que les lignes horizontales descendent doucement */
+.pixel-grid-overlay {
+    background: linear-gradient(
+        to bottom,
+        rgba(255,255,255,0),
+        rgba(255,255,255,0) 50%,
+        rgba(0,0,0,0.3) 50%,
+        rgba(0,0,0,0.3)
+    );
+    background-size: 100% 4px;
+    animation: scanline-scroll 10s linear infinite;
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 9000;
+}
+
+@keyframes scanline-scroll {
+    0% { background-position: 0 0; }
+    100% { background-position: 0 100%; }
 }
